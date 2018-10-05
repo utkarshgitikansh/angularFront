@@ -335,7 +335,7 @@ var WeatherInfoService = /** @class */ (function () {
         this.http = http;
     }
     WeatherInfoService.prototype.getWeather = function (city, state) {
-        return this.http.get('https://lifesoul.herokuapp.com/weather?' + state + '&' + city)
+        return this.http.get('https://lifesoul.herokuapp.com/weather?state=' + state + '&city=' + city)
             .map(function (res) { return res.json(); });
     };
     WeatherInfoService = __decorate([
