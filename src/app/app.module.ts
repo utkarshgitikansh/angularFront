@@ -10,17 +10,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { FormsModule } from '@angular/forms';
+//import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainNavComponent
+    MainNavComponent,
+ 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgxJsonViewerModule,
+   // Ng2SmartTableModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
