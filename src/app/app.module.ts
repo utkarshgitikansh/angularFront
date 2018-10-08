@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { FormsModule } from '@angular/forms';
-//import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { CurrentMatchesService } from './current-matches.service';
 
 
 
@@ -24,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     BrowserAnimationsModule,
     NgxJsonViewerModule,
-   // Ng2SmartTableModule,
+    Ng2SmartTableModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -37,7 +38,7 @@ import { FormsModule } from '@angular/forms';
   ],
   
   providers: [
-   
+    CurrentMatchesService
   ],
   bootstrap: [AppComponent]
 })
