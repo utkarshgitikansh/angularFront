@@ -7,6 +7,8 @@ import { WeatherInfoService } from '../weather-info.service';
 import { CurrentMatchesService } from './../current-matches.service';
 import { Current_matches } from './../current_matches';
 import { weather } from './../weather';
+import { DataSource } from '@angular/cdk/collections';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 @Component({
@@ -31,55 +33,42 @@ weather_elements : weather[];
 weatherForm: Boolean;
 cricInfo: Boolean;
 weatherInfo : Boolean;
+//dataSource = new UserDataSource(this.cmatches);
+displayedColumns = ['Date','Team A','Team B','Toss','Winner']
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
     
-  constructor(private breakpointObserver: BreakpointObserver, private service:DataInfoService, private wservice:WeatherInfoService, private cmatches:CurrentMatchesService ) {}
+  constructor(private breakpointObserver: BreakpointObserver, private service:DataInfoService, private wservice:WeatherInfoService, private cmatches:CurrentMatchesService ,
+      private spinnerService: Ng4LoadingSpinnerService) {}
   
 
   ngOnInit() {
-    // this.service.getAll().subscribe(
-    //   data => {
-    //     this.info = data;
-        
-    //   },
-      
-    // )
-  } 
-
-  // cricketScore(){
-
-  //      this.weatherForm = false;
-  //      this.service.getAll().subscribe(
-  //     data => {
-  //       this.info = data;
-        
-  //     },
-      
-  //   )
-  // }
+  }
   
   cricketScore(){
 
+    this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = true;
+    
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
+     
       this.info = data;
+      
       this.characters = this.info.current_matches;
   });
-  
+    
   
   }
-
+ 
 
   formWeather(){
 
     this.weatherForm = true;
-    //this.hideForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
   }
@@ -103,53 +92,22 @@ weatherInfo : Boolean;
   }
 
 
-  settings = {
-    columns: {
-      id: {
-        title: 'ID'
-      },
-      teamA: {
-        title: 'Team A'
-      },
-      teamB: {
-        title: 'Team B'
-      }
-      ,
-      winner: {
-        title: 'Winner'
-      }
-      ,
-      type: {
-        title: 'Type'
-      }
-    }
-  };
-
-
-  settings_weather = {
-    columns: {
-      full_name: {
-        title: 'full_name'
-      },
-      weather: {
-        title: 'weather'
-      },
-      temp_celsius: {
-        title: 'temp_celsius'
-      }
-      ,
-      relative_humidity: {
-        title: 'relative_humidity'
-      }
-      ,
-      icon_url: {
-        title: 'icon_url'
-      }
-    }
-  };
-
   }
 
+
+  
+  export class UserDataSource extends DataSource<any> {
+
+    constructor(private userService: CurrentMatchesService){
+      super();
+    }
+
+    connect(): Observable<any>{
+      return this.userService.getMatches();
+    }
+
+    disconnect() {}
+  }
 
  
 

@@ -25,15 +25,52 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>lifesoul</span>
+      <!-- <span>lifesoul</span> -->
     </mat-toolbar>
 
+   
+    
+    <mat-table class="lessons-table mat-elevation-z8" *ngIf="cricInfo" [dataSource]="characters">
+      
+        <ng-container matColumnDef="Date">
+            <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{item.date}}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Team A">
+            <mat-header-cell *matHeaderCellDef>Team A</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let item">{{item.teamA}}</mat-cell>
+    
+        </ng-container>
+    
+        <ng-container matColumnDef="Team B">
+            <mat-header-cell *matHeaderCellDef>Team B</mat-header-cell>
+            <mat-cell class="duration-cell"
+                      *matCellDef="let item">{{item.teamB}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Toss">
+            <mat-header-cell *matHeaderCellDef>Toss</mat-header-cell>
+            <mat-cell class="duration-cell"
+                      *matCellDef="let item">{{item.toss}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Winner">
+            <mat-header-cell *matHeaderCellDef>Winner</mat-header-cell>
+            <mat-cell class="duration-cell"
+                      *matCellDef="let item">{{item.winner}}</mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    
+    </mat-table>
     <!-- <ngx-json-viewer *ngIf="!weatherForm" [json]="characters" [expanded]="false"></ngx-json-viewer> -->
 
-    <ng2-smart-table *ngIf="cricInfo"
+    <!-- <ng2-smart-table *ngIf="cricInfo"
     [settings]="settings" 
     [source]="characters">
-        <thead>
+         <thead>
           <tr>
             <th>ID</th>
             <th>Team A</th>
@@ -46,11 +83,11 @@
             <td>{{ item.teamA }}</td>
             <td>{{ item.teamB }}</td>
           </tr>
-        </tbody>
-    </ng2-smart-table>
+        </tbody> 
+    </ng2-smart-table> -->
 
    
-    <ng2-smart-table *ngIf="weatherInfo"
+    <!-- <ng2-smart-table *ngIf="weatherInfo"
     [settings]="settings_weather" 
     [source]="weather_elements">
     
@@ -69,7 +106,7 @@
           </tr>
         </tbody>
     
-    </ng2-smart-table>
+    </ng2-smart-table> -->
 
     <div *ngIf="weatherForm"class="jumbotron">
         <div class="container">

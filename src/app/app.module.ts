@@ -12,6 +12,9 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { FormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CurrentMatchesService } from './current-matches.service';
+import {MatTableModule} from '@angular/material/table';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
 
 
 
@@ -27,6 +30,7 @@ import { CurrentMatchesService } from './current-matches.service';
     NgxJsonViewerModule,
     Ng2SmartTableModule,
     LayoutModule,
+    MatTableModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -34,7 +38,8 @@ import { CurrentMatchesService } from './current-matches.service';
     MatListModule,
     HttpClientModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   
   providers: [
@@ -42,4 +47,7 @@ import { CurrentMatchesService } from './current-matches.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  template: string =`<img src="http://pa1.narvii.com/5722/2c617cd9674417d272084884b61e4bb7dd5f0b15_hq.gif" />`
+}
