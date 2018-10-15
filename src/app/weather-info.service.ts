@@ -10,15 +10,15 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class WeatherInfoService {
-  
-  url;
+ 
 
   constructor(public http: Http) {
   }
 
   getWeather(city, state){
     return this.http.get('https://lifesoul.herokuapp.com/weather?state='+state+'&city='+city)   
-      .map(res => res.json());
-  }
+      .map(res => res.json()
+    )};
 
+  
 }

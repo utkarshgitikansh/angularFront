@@ -12,7 +12,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { FormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CurrentMatchesService } from './current-matches.service';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 

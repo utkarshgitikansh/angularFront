@@ -9,7 +9,7 @@
     <mat-toolbar color="primary"></mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item (click)="cricketScore()">Cricket</a>
+      <a mat-list-item (click)="menu()">Cricket</a>
       <a mat-list-item (click)="formWeather()">Weather</a>
       <!-- <a mat-list-item (click)="documents()">Documentation</a>
       <a mat-list-item (click)="logs()">Logs</a> -->
@@ -28,7 +28,12 @@
       <!-- <span>lifesoul</span> -->
     </mat-toolbar>
 
-   
+    
+   <div *ngIf="menuInfo">
+    <button class="btn btn-primary" (click)="cricketScore()">  Live Matches  </button>
+    <button class="btn btn-primary" (click)="upcomingScore()">  Upcoming Matches  </button>
+    <button class="btn btn-primary" (click)="playerForm()">  Player Info  </button>
+   </div>
     
     <mat-table class="lessons-table mat-elevation-z8" *ngIf="cricInfo" [dataSource]="characters">
       
@@ -65,48 +70,115 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     
     </mat-table>
-    <!-- <ngx-json-viewer *ngIf="!weatherForm" [json]="characters" [expanded]="false"></ngx-json-viewer> -->
 
-    <!-- <ng2-smart-table *ngIf="cricInfo"
-    [settings]="settings" 
-    [source]="characters">
-         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Team A</th>
-            <th>team B</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of characters">
-            <td>{{ item.id }}</td>
-            <td>{{ item.teamA }}</td>
-            <td>{{ item.teamB }}</td>
-          </tr>
-        </tbody> 
-    </ng2-smart-table> -->
+    <mat-table class="lessons-table mat-elevation-z8" *ngIf="upcomingInfo" [dataSource]="characters">
+      
+            <ng-container matColumnDef="Date">
+                <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+                <mat-cell *matCellDef="let item">{{item.date}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="Team A">
+                <mat-header-cell *matHeaderCellDef>Team A</mat-header-cell>
+                <mat-cell class="description-cell"
+                          *matCellDef="let item">{{item.teamA}}</mat-cell>
+        
+            </ng-container>
+        
+            <ng-container matColumnDef="Team B">
+                <mat-header-cell *matHeaderCellDef>Team B</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let item">{{item.teamB}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Toss">
+                <mat-header-cell *matHeaderCellDef>Toss</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let item">{{item.toss}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Winner">
+                <mat-header-cell *matHeaderCellDef>Winner</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let item">{{item.winner}}</mat-cell>
+            </ng-container>
+      
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        
+        </mat-table>
+    
 
-   
-    <!-- <ng2-smart-table *ngIf="weatherInfo"
-    [settings]="settings_weather" 
-    [source]="weather_elements">
+    <mat-table class="lessons-table mat-elevation-z8" *ngIf="weatherInfo" [dataSource]="climate">
+      
+        <ng-container matColumnDef="Date">
+            <mat-header-cell *matHeaderCellDef>Place</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{item.full_name}}</mat-cell>
+        </ng-container>
     
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Team A</th>
-            <th>team B</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of weather_elements">
-            <td>{{ item.id }}</td>
-            <td>{{ item.teamA }}</td>
-            <td>{{ item.teamB }}</td>
-          </tr>
-        </tbody>
+        <ng-container matColumnDef="Team A">
+            <mat-header-cell *matHeaderCellDef>Weather</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let item">{{item.weather}}</mat-cell>
     
-    </ng2-smart-table> -->
+        </ng-container>
+    
+        <ng-container matColumnDef="Team B">
+            <mat-header-cell *matHeaderCellDef>Temperature</mat-header-cell>
+            <mat-cell class="duration-cell"
+                      *matCellDef="let item">{{item.temp_celsius}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Toss">
+            <mat-header-cell *matHeaderCellDef>Humidity</mat-header-cell>
+            <mat-cell class="duration-cell"
+                      *matCellDef="let item">{{item.relative_humidity}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Winner">
+            <mat-header-cell *matHeaderCellDef>Visibility(in km)</mat-header-cell>
+            <mat-cell class="duration-cell"
+                      *matCellDef="let item">{{item.visibility_km}}</mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    
+    </mat-table>
+
+    <mat-table class="lessons-table mat-elevation-z8" *ngIf="playerBio && bat" [dataSource]="playerData">
+      
+            <ng-container matColumnDef="Date">
+                <mat-header-cell *matHeaderCellDef>Player Name</mat-header-cell>
+                <mat-cell *matCellDef="let item">{{item.name}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="Team A">
+                <mat-header-cell *matHeaderCellDef>Full Name</mat-header-cell>
+                <mat-cell class="description-cell"
+                          *matCellDef="let item">{{item.full_name}}</mat-cell>
+        
+            </ng-container>
+        
+            <ng-container matColumnDef="Team B">
+                <mat-header-cell *matHeaderCellDef>Batting Style</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let item">{{item.battingStyle}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Toss">
+                <mat-header-cell *matHeaderCellDef>Player Role</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let item">{{item.player_role}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Winner">
+                <mat-header-cell *matHeaderCellDef>Teams</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let item">{{item.teams}}</mat-cell>
+            </ng-container>
+      
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        
+        </mat-table>
 
     <div *ngIf="weatherForm"class="jumbotron">
         <div class="container">
@@ -153,6 +225,27 @@
         </div>
     </div>
 
+    <div *ngIf="playerform"class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <h3>Player Info</h3>
+                        <form name="form" (ngSubmit)="f.form.valid && playerScore()" #f="ngForm" novalidate>
+                            <div class="form-group">
+                                <label for="firstName">Player Name</label>
+                                <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+                                <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                                    <div *ngIf="firstName.errors.required">Player Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
   </mat-sidenav-content>
 
