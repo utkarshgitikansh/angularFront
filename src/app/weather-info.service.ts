@@ -16,7 +16,7 @@ export class WeatherInfoService {
   }
 
   getWeather(city, state){
-    return this.http.get('https://lifesoul.herokuapp.com/weather?state='+state+'&city='+city)   
+    return this.http.get('https://lifesoul.herokuapp.com/weather?city='+city)   
       .map(res => res.json()
     )};
 

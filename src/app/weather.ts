@@ -1,7 +1,8 @@
-export interface weather {
-    full_name: String;
-    weather: String;
-    temp_celsius: String;
-    relative_humidity: String;
-    icon_url: String;
+export interface current_weather {
+    temp_c: String;
+    condition: String;
+    humidity: String;
+    vis_km: String;
+    temperature: String;
+    
 }

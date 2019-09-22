@@ -6,7 +6,7 @@ import { DataInfoService } from '../data-info.service';
 import { WeatherInfoService } from '../weather-info.service';
 import { CurrentMatchesService } from './../current-matches.service';
 import { Current_matches } from './../current_matches';
-import { weather } from './../weather';
+import { current_weather } from './../weather';
 import { PlayerData } from './../player-data';
 import { DataSource } from '@angular/cdk/collections';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -29,7 +29,7 @@ model: any = {
 
 
 characters: Current_matches[];
-
+weather : current_weather[];
 // model:{
 //   firstname : any;
 //   lastname : any;
@@ -43,9 +43,11 @@ menuInfo : Boolean;
 playerform : Boolean;
 playerBio : Boolean;
 bat : Boolean;
+icon_state : Boolean;
+icon_img : string;
 playerData : PlayerData[];
-weather_elements : weather[];
-climate : weather[];
+
+//climate : weather[];
 
 //dataSource = new UserDataSource(this.cmatches);
 displayedColumns = ['Date','Team A','Team B','Toss','Winner']
@@ -71,6 +73,7 @@ displayedColumns = ['Date','Team A','Team B','Toss','Winner']
     this.menuInfo = true;
     this.playerBio = false;
     this.playerform = false;
+    this.icon_state= false;
 
   }
   
@@ -84,6 +87,7 @@ displayedColumns = ['Date','Team A','Team B','Toss','Winner']
     this.cricInfo = true;
     this.playerBio = false;
     this.playerform = false;
+    this.icon_state= false;
     
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
      
@@ -109,6 +113,7 @@ displayedColumns = ['Date','Team A','Team B','Toss','Winner']
     this.cricInfo = false;
     this.playerBio = false;
     this.playerform = false;
+    this.icon_state= false;
     
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
      
@@ -133,6 +138,7 @@ formWeather(){
   this.upcomingInfo = false;
   this.playerBio = false;
   this.playerform = false;
+  this.icon_state= false;
 }
 
 
@@ -143,7 +149,7 @@ formWeather(){
    // var city =detail.lastName;
    // var state= detail.firstName;
 
-    this.weather_elements = null;
+    //this.weather = null;
     //console.log(this.weather_elements);
       this.liveWeather1(this.model.firstName, this.model.lastName);
    
@@ -152,17 +158,27 @@ formWeather(){
   }
 
   liveWeather1(state,city){
-        
+
        
         
       this.spinnerService.show();
-      this.weatherInfo = true;
-      this.wservice.getWeather(city,state).subscribe((data: weather[]) => {
+      // this.weatherInfo = true;
       
+      this.wservice.getWeather(city,state).subscribe((data: current_weather[]) => {
+        
+        this.info = data;
+        this.weather = this.info.temperature;
+        console.log(this.weather)
+        this.icon_img = this.weather[0]["icon_url"];
+        //this.climate = this.weather_elements;
+        //this.info = null;   
   });
 
-
+console.log(this.icon_img );
       this.weatherForm = false;
+      this.weatherInfo = true;
+      this.icon_state= true;
+      this.spinnerService.hide();
    // this.hideForm = false;
       this.cricInfo = false;
       this.menuInfo = false;
@@ -170,8 +186,8 @@ formWeather(){
       this.playerBio = false;
       this.playerform = false;
 
-      this.formWeather();
-      this.liveWeather2(state, city);
+      //this.formWeather();
+      //this.liveWeather2(state, city);
 
 }
 
@@ -181,13 +197,14 @@ formWeather(){
         
         
         this.weatherInfo = true;
-        this.wservice.getWeather(city,state).subscribe((data: weather[]) => {
-        this.info = data;
-        this.weather_elements = this.info.temperature;
-        this.climate = this.weather_elements;
-        this.info = null;   
+        this.wservice.getWeather(city,state).subscribe((data: current_weather[]) => {
+        // this.info = data;
+        // this.weather_elements = this.info.current;
+        //this.climate = this.weather_elements;
+        //this.info = null;   
+        
     });
- 
+        
         this.spinnerService.hide();
         this.weatherForm = false;
      // this.hideForm = false;

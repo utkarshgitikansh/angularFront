@@ -4,4 +4,5 @@ export interface Current_matches {
     teamB: String;
     winner: String;
     type: String;
+    Date: String
 }

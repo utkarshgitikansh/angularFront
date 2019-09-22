@@ -29,7 +29,7 @@
     </mat-toolbar>
 
     
-   <div *ngIf="menuInfo">
+   <div *ngIf="menuInfo" id = "menu_pos">
     <button class="btn btn-primary" (click)="cricketScore()">  Live Matches  </button>
     <button class="btn btn-primary" (click)="upcomingScore()">  Upcoming Matches  </button>
     <button class="btn btn-primary" (click)="playerForm()">  Player Info  </button>
@@ -108,8 +108,9 @@
         </mat-table>
     
 
-    <mat-table class="lessons-table mat-elevation-z8" *ngIf="weatherInfo" [dataSource]="climate">
+    <mat-table class="lessons-table mat-elevation-z8" *ngIf="weatherInfo" [dataSource]="weather">
       
+        
         <ng-container matColumnDef="Date">
             <mat-header-cell *matHeaderCellDef>Place</mat-header-cell>
             <mat-cell *matCellDef="let item">{{item.full_name}}</mat-cell>
@@ -143,6 +144,10 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     
     </mat-table>
+
+    <div id="weather_icon" *ngIf="icon_state" >
+        <img [src]="icon_img" >
+    </div>
 
     <mat-table class="lessons-table mat-elevation-z8" *ngIf="playerBio && bat" [dataSource]="playerData">
       
