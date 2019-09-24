@@ -14,14 +14,19 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CurrentMatchesService } from './current-matches.service';
 import { MatTableModule } from '@angular/material/table';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-
-
+import { LogService }
+        from './shared/log.service';
+import { LogTestComponent }
+  from './log-test/log-test.component';
+import { LogPublishersService }
+  from './shared/logPublishers.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
+    LogTestComponent
  
   ],
   imports: [
@@ -43,7 +48,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
   ],
   
   providers: [
-    CurrentMatchesService
+    CurrentMatchesService,
+    LogService,
+    LogPublishersService
   ],
   bootstrap: [AppComponent]
 })
