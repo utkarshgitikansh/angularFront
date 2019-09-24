@@ -1,71 +1,99 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { DataInfoService } from '../data-info.service';
-import { WeatherInfoService } from '../weather-info.service';
-import { CurrentMatchesService } from './../current-matches.service';
-import { Current_matches } from './../current_matches';
-import { current_weather } from './../weather';
-import { PlayerData } from './../player-data';
-import { DataSource } from '@angular/cdk/collections';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { Request } from '@angular/http';
-import { PlayerInfoService } from './../player-info.service';
+import { Component } from "@angular/core";
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from "@angular/cdk/layout";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { DataInfoService } from "../data-info.service";
+import { WeatherInfoService } from "../weather-info.service";
+import { CurrentMatchesService } from "./../current-matches.service";
+import { Current_matches } from "./../current_matches";
+import { current_weather } from "./../weather";
+import { PlayerData } from "./../player-data";
+import { DataSource } from "@angular/cdk/collections";
+import { Ng4LoadingSpinnerService } from "ng4-loading-spinner";
+import { Request } from "@angular/http";
+import { PlayerInfoService } from "./../player-info.service";
+import { BlogServiceService } from "./../blog-service.service";
 
 @Component({
-  selector: 'app-main-nav',
-  templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.css'],
-  providers: [DataInfoService,WeatherInfoService]
+  selector: "app-main-nav",
+  templateUrl: "./main-nav.component.html",
+  styleUrls: ["./main-nav.component.css"],
+  providers: [DataInfoService, WeatherInfoService, BlogServiceService]
 })
 export class MainNavComponent {
+  info: any = "No Data";
+  winfo: any = "No Data";
+  model: any = {};
 
-info:any = "No Data";
-winfo: any = "No Data";
-model: any = {
+  characters: Current_matches[];
+  weather: current_weather[];
+  // model:{
+  //   firstname : any;
+  //   lastname : any;
+  // }
+  weatherForm: Boolean;
+  cricInfo: Boolean;
+  upcomingInfo: Boolean;
+  flag: Boolean;
+  weatherInfo: Boolean;
+  menuInfo: Boolean;
+  playerform: Boolean;
+  playerBio: Boolean;
+  bat: Boolean;
+  icon_state: Boolean;
+  icon_img: string;
+  playerData: PlayerData[];
+  blogData: any;
+  blog_state: Boolean;
 
-};
+  //climate : weather[];
 
+  //dataSource = new UserDataSource(this.cmatches);
+  displayedColumns = ["Date", "Team A", "Team B", "Toss", "Winner"];
 
-characters: Current_matches[];
-weather : current_weather[];
-// model:{
-//   firstname : any;
-//   lastname : any;
-// }
-weatherForm: Boolean;
-cricInfo: Boolean;
-upcomingInfo: Boolean;
-flag: Boolean;
-weatherInfo : Boolean;
-menuInfo : Boolean;
-playerform : Boolean;
-playerBio : Boolean;
-bat : Boolean;
-icon_state : Boolean;
-icon_img : string;
-playerData : PlayerData[];
+  blogscolumns = ["blog", "title"];
 
-//climate : weather[];
+  cricketcolumns = ["title", "button"];
+  cricketfunctions = ["cricketScore()", "upcomingScore()", "playerForm()"];
 
-//dataSource = new UserDataSource(this.cmatches);
-displayedColumns = ['Date','Team A','Team B','Toss','Winner']
+  menuItems = [
+    {
+      name: "Live Matches",
+      func: "cricketScore()"
+    },
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
-    
-  constructor(private breakpointObserver: BreakpointObserver, private service:DataInfoService, private wservice:WeatherInfoService, private cmatches:CurrentMatchesService ,
-      private spinnerService: Ng4LoadingSpinnerService,private playerservices:PlayerInfoService ) {}
-  
+    {
+      name: "Upcoming Matches",
+      func: "upcomingScore()"
+    },
 
-  ngOnInit() {
-    
-  }
+    {
+      name: "Player Info",
+      func: "playerForm()"
+    }
+  ];
 
-  menu(){
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches));
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private service: DataInfoService,
+    private wservice: WeatherInfoService,
+    private cmatches: CurrentMatchesService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private playerservices: PlayerInfoService,
+    private blogServices: BlogServiceService
+  ) {}
+
+  ngOnInit() {}
+
+  menu() {
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -73,12 +101,11 @@ displayedColumns = ['Date','Team A','Team B','Toss','Winner']
     this.menuInfo = true;
     this.playerBio = false;
     this.playerform = false;
-    this.icon_state= false;
-
+    this.icon_state = false;
+    this.blog_state = false;
   }
-  
-  cricketScore(){
 
+  cricketScore() {
     this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
@@ -87,24 +114,21 @@ displayedColumns = ['Date','Team A','Team B','Toss','Winner']
     this.cricInfo = true;
     this.playerBio = false;
     this.playerform = false;
-    this.icon_state= false;
-    
+    this.icon_state = false;
+    this.blog_state = false;
+
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
-     
       this.info = data;
-      
+
       this.characters = this.info.current_matches;
-  });
+    });
 
-  setTimeout( _=>{
-    this.spinnerService.hide();
-  }, 2000)
-  
-
+    setTimeout(_ => {
+      this.spinnerService.hide();
+    }, 2000);
   }
 
-  upcomingScore(){
-
+  upcomingScore() {
     this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
@@ -113,110 +137,98 @@ displayedColumns = ['Date','Team A','Team B','Toss','Winner']
     this.cricInfo = false;
     this.playerBio = false;
     this.playerform = false;
-    this.icon_state= false;
-    
+    this.icon_state = false;
+    this.blog_state = false;
+
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
-     
       this.info = data;
-      
+
       this.characters = this.info.upcoming_matches;
-  });
+    });
 
-  setTimeout( _=>{
-    this.spinnerService.hide();
-  }, 2000)
-  
-
+    setTimeout(_ => {
+      this.spinnerService.hide();
+    }, 2000);
   }
- 
-formWeather(){
 
-  this.weatherForm = true;
-  this.weatherInfo = false;
-  this.cricInfo = false;
-  this.menuInfo = false;
-  this.upcomingInfo = false;
-  this.playerBio = false;
-  this.playerform = false;
-  this.icon_state= false;
-}
+  formWeather() {
+    this.weatherForm = true;
+    this.weatherInfo = false;
+    this.cricInfo = false;
+    this.menuInfo = false;
+    this.upcomingInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
+    this.icon_state = false;
+    this.blog_state = false;
+  }
 
-
-  liveWeather(){
-
-
-   // var detail = this.model;
-   // var city =detail.lastName;
-   // var state= detail.firstName;
+  liveWeather() {
+    // var detail = this.model;
+    // var city =detail.lastName;
+    // var state= detail.firstName;
 
     //this.weather = null;
     //console.log(this.weather_elements);
-      this.liveWeather1(this.model.firstName, this.model.lastName);
-   
-    
+    this.liveWeather1(this.model.firstName, this.model.lastName);
+
     //this.liveWeather();
   }
 
-  liveWeather1(state,city){
+  liveWeather1(state, city) {
+    this.spinnerService.show();
+    // this.weatherInfo = true;
 
-       
-        
-      this.spinnerService.show();
-      // this.weatherInfo = true;
-      
-      this.wservice.getWeather(city,state).subscribe((data: current_weather[]) => {
-        
+    this.wservice
+      .getWeather(city, state)
+      .subscribe((data: current_weather[]) => {
         this.info = data;
         this.weather = this.info.temperature;
-        console.log(this.weather)
+        console.log(this.weather);
         this.icon_img = this.weather[0]["icon_url"];
         //this.climate = this.weather_elements;
-        //this.info = null;   
-  });
+        //this.info = null;
+      });
 
-console.log(this.icon_img );
-      this.weatherForm = false;
-      this.weatherInfo = true;
-      this.icon_state= true;
-      this.spinnerService.hide();
-   // this.hideForm = false;
-      this.cricInfo = false;
-      this.menuInfo = false;
-      this.upcomingInfo = false;
-      this.playerBio = false;
-      this.playerform = false;
+    console.log(this.icon_img);
+    this.weatherForm = false;
+    this.weatherInfo = true;
+    this.icon_state = true;
+    this.spinnerService.hide();
+    // this.hideForm = false;
+    this.cricInfo = false;
+    this.menuInfo = false;
+    this.upcomingInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
+    this.blog_state = false;
 
-      //this.formWeather();
-      //this.liveWeather2(state, city);
+    //this.formWeather();
+    //this.liveWeather2(state, city);
+  }
 
-}
-
-  liveWeather2(state,city){
-        
-       
-        
-        
-        this.weatherInfo = true;
-        this.wservice.getWeather(city,state).subscribe((data: current_weather[]) => {
+  liveWeather2(state, city) {
+    this.weatherInfo = true;
+    this.wservice
+      .getWeather(city, state)
+      .subscribe((data: current_weather[]) => {
         // this.info = data;
         // this.weather_elements = this.info.current;
         //this.climate = this.weather_elements;
-        //this.info = null;   
-        
-    });
-        
-        this.spinnerService.hide();
-        this.weatherForm = false;
-     // this.hideForm = false;
-        this.cricInfo = false;
-        this.menuInfo = false;
-        this.upcomingInfo = false;
-        this.playerBio = false;
-        this.playerform = false;
+        //this.info = null;
+      });
 
+    this.spinnerService.hide();
+    this.weatherForm = false;
+    // this.hideForm = false;
+    this.cricInfo = false;
+    this.menuInfo = false;
+    this.upcomingInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
   }
 
-  playerForm(){
+  playerForm() {
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -224,10 +236,10 @@ console.log(this.icon_img );
     this.upcomingInfo = false;
     this.playerform = true;
     this.playerBio = false;
-
+    this.blog_state = false;
   }
 
-  playerScore(){
+  playerScore() {
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -235,21 +247,19 @@ console.log(this.icon_img );
     this.upcomingInfo = false;
     this.playerform = false;
     this.playerBio = true;
+    this.blog_state = false;
+
     var name = this.model.firstName;
 
-    this.playerservices.getPlayer(name).subscribe((data : PlayerData[]) => {
-    this.info = data;
-    this.playerScore1();
-
-
-  });
-    // this.menu();  
+    this.playerservices.getPlayer(name).subscribe((data: PlayerData[]) => {
+      this.info = data;
+      this.playerScore1();
+    });
+    // this.menu();
     // this.playerForm();
-   
   }
 
-  playerScore1(){
-
+  playerScore1() {
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -257,35 +267,58 @@ console.log(this.icon_img );
     this.upcomingInfo = false;
     this.playerform = false;
     this.playerBio = true;
+    this.blog_state = false;
     var name = this.model.firstName;
 
-    this.playerservices.getPlayer(name).subscribe((data : PlayerData[]) => {
-      setTimeout( _=>{
-        
+    this.playerservices.getPlayer(name).subscribe((data: PlayerData[]) => {
+      setTimeout(_ => {
         this.playerData = this.info.info;
         var check = JSON.stringify(this.playerData[0]["player_role"]);
-        if(check.includes("batsman")) {
-        this.bat = true;
+        if (check.includes("batsman")) {
+          this.bat = true;
         }
         console.log(this.playerData);
-        this.info = null;   
-      }, 2000)
-  });
-  }
-  }
-  
-  export class UserDataSource extends DataSource<any> {
-
-    constructor(private userService: CurrentMatchesService){
-      super();
-    }
-
-    connect(): Observable<any>{
-      return this.userService.getMatches();
-    }
-
-    disconnect() {}
+        this.info = null;
+      }, 2000);
+    });
   }
 
- 
+  ///// getting blogs
 
+  getBlog() {
+    ////settings parameters
+
+    this.spinnerService.show();
+    this.weatherForm = false;
+    this.weatherInfo = false;
+    this.cricInfo = false;
+    this.upcomingInfo = false;
+    this.menuInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
+    this.icon_state = false;
+    this.blog_state = true;
+
+    this.blogServices.getBlogs().subscribe(data => {
+      setTimeout(_ => {
+        var item = data;
+        item["items"].forEach(element => {
+          this.blogData = item["items"];
+          this.spinnerService.hide();
+        });
+      }, 1000);
+    });
+  }
+}
+
+export class UserDataSource extends DataSource<any> {
+  constructor(private userService: CurrentMatchesService) {
+    super();
+  }
+
+  connect(): Observable<any> {
+    return this.userService.getMatches();
+  }
+
+  disconnect() {}
+}
