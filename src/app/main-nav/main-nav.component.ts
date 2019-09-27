@@ -31,6 +31,8 @@ export class MainNavComponent {
 
   characters: Current_matches[];
   weather: current_weather[];
+  city: String;
+  city_data: String;
   // model:{
   //   firstname : any;
   //   lastname : any;
@@ -43,12 +45,16 @@ export class MainNavComponent {
   menuInfo: Boolean;
   playerform: Boolean;
   playerBio: Boolean;
-  bat: Boolean;
+  bat = false;
+  bowl = true;
   icon_state: Boolean;
   icon_img: string;
   playerData: PlayerData[];
   blogData: any;
   blog_state: Boolean;
+  playerODI: any;
+  playerTest: any;
+  playerT20: any;
 
   //climate : weather[];
 
@@ -183,6 +189,9 @@ export class MainNavComponent {
       .getWeather(city, state)
       .subscribe((data: current_weather[]) => {
         this.info = data;
+        this.city = this.info.temperature[0]["full_name"];
+
+        console.log(this.city);
         this.weather = this.info.temperature;
         console.log(this.weather);
         this.icon_img = this.weather[0]["icon_url"];
@@ -190,7 +199,9 @@ export class MainNavComponent {
         //this.info = null;
       });
 
-    console.log(this.icon_img);
+    this.cityInfo(city);
+
+    // console.log(this.icon_img);
     this.weatherForm = false;
     this.weatherInfo = true;
     this.icon_state = true;
@@ -205,6 +216,15 @@ export class MainNavComponent {
 
     //this.formWeather();
     //this.liveWeather2(state, city);
+  }
+
+  // city info
+
+  cityInfo(city) {
+    this.wservice.getcityInfo(city).subscribe(data => {
+      this.city_data = data;
+      console.log(this.city_data);
+    });
   }
 
   liveWeather2(state, city) {
@@ -273,13 +293,25 @@ export class MainNavComponent {
     this.playerservices.getPlayer(name).subscribe((data: PlayerData[]) => {
       setTimeout(_ => {
         this.playerData = this.info.info;
+        this.playerODI = this.info.ODIs;
+        this.playerTest = this.info.tests;
+        this.playerT20 = this.info.T20Is;
+
         var check = JSON.stringify(this.playerData[0]["player_role"]);
+
         if (check.includes("batsman")) {
           this.bat = true;
+          this.bowl = false;
+        } else {
+          this.bat = false;
+          this.bowl = true;
         }
-        console.log(this.playerData);
-        this.info = null;
-      }, 2000);
+
+        // if (this.bat == true) {
+        //   console.log(this.playerData);
+        // }
+        //this.info = null;
+      }, 500);
     });
   }
 

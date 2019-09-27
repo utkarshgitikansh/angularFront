@@ -1,7 +1,10 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
@@ -76,26 +79,42 @@
 
     <!-- Cricket data -->
 
-
-<div class="container" *ngIf="menuInfo">
-	<!-- <div class="row">
+    <div class="container" *ngIf="menuInfo">
+      <!-- <div class="row">
 		<h2>Cricket</h2>
 	</div> -->
-    
-    <div class="row">
-    
-    <div class="col-md-6">       <!-- Standard button -->
-<button type="button" class="btn btn-default ribbon" (click)="cricketScore()">Live Score</button>
 
-<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-<button type="button" class="btn btn-primary ribbon" (click)="upcomingScore()">Upcoming Matches</button>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Standard button -->
+          <button
+            type="button"
+            class="btn btn-default ribbon"
+            (click)="cricketScore()"
+          >
+            Live Score
+          </button>
 
-<!-- Indicates a successful or positive action -->
-<button type="button" class="btn btn-success ribbon" (click)="playerForm()">Player Info</button>
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+          <button
+            type="button"
+            class="btn btn-primary ribbon"
+            (click)="upcomingScore()"
+          >
+            Upcoming Matches
+          </button>
 
-</div>
-</div>
-</div>
+          <!-- Indicates a successful or positive action -->
+          <button
+            type="button"
+            class="btn btn-success ribbon"
+            (click)="playerForm()"
+          >
+            Player Info
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- <mat-table
       class="lessons-table mat-elevation-z8"
@@ -249,6 +268,12 @@
     <div id="weather_icon" *ngIf="icon_state">
       <img [src]="icon_img" />
     </div>
+    <div id="city_info" *ngIf="icon_state">
+      {{ city_data }}
+    </div>
+
+
+     <!-- For batsman -->
 
     <mat-table
       class="lessons-table mat-elevation-z8"
@@ -290,6 +315,310 @@
 
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
+
+    <div *ngIf="playerBio && bat">
+      ODIs
+    </div>
+    <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bat"
+      [dataSource]="playerODI"
+    >
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef>Matches</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.matches }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team A">
+        <mat-header-cell *matHeaderCellDef>Innings</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let item">{{
+          item.innings
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team B">
+        <mat-header-cell *matHeaderCellDef>Runs</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.runs
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Toss">
+        <mat-header-cell *matHeaderCellDef>100s</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.hundreds
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Winner">
+        <mat-header-cell *matHeaderCellDef>50s</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.fifties
+        }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <div *ngIf="playerBio && bat">
+      Tests
+    </div>
+    <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bat"
+      [dataSource]="playerTest"
+    >
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef>Matches</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.matches }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team A">
+        <mat-header-cell *matHeaderCellDef>Innings</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let item">{{
+          item.innings
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team B">
+        <mat-header-cell *matHeaderCellDef>Runs</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.runs
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Toss">
+        <mat-header-cell *matHeaderCellDef>100s</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.hundreds
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Winner">
+        <mat-header-cell *matHeaderCellDef>50s</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.fifties
+        }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <div *ngIf="playerBio && bat">
+      T20Is
+    </div>
+    <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bat"
+      [dataSource]="playerT20"
+    >
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef>Matches</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.matches }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team A">
+        <mat-header-cell *matHeaderCellDef>Innings</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let item">{{
+          item.innings
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team B">
+        <mat-header-cell *matHeaderCellDef>Runs</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.runs
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Toss">
+        <mat-header-cell *matHeaderCellDef>100s</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.hundreds
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Winner">
+        <mat-header-cell *matHeaderCellDef>50s</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.fifties
+        }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+
+ <!-- For bowler -->
+
+
+ <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bowl"
+      [dataSource]="playerData"
+    >
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef>Player Name</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.name }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team A">
+        <mat-header-cell *matHeaderCellDef>Full Name</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let item">{{
+          item.full_name
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team B">
+        <mat-header-cell *matHeaderCellDef>Bowling Style</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.bowlingStyle
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Toss">
+        <mat-header-cell *matHeaderCellDef>Player Role</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.player_role
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Winner">
+        <mat-header-cell *matHeaderCellDef>Teams</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.teams
+        }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <div *ngIf="playerBio && bowl">
+      ODIs
+    </div>
+
+    <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bowl"
+      [dataSource]="playerODI"
+    >
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef>Matches</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.matches }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team A">
+        <mat-header-cell *matHeaderCellDef>Innings</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let item">{{item.innings}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team B">
+        <mat-header-cell *matHeaderCellDef>Wickets</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{item.wickets}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Toss">
+        <mat-header-cell *matHeaderCellDef>Average</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{item.average}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Winner">
+        <mat-header-cell *matHeaderCellDef>best_figures</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{item.best_figures}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+
+
+    
+    <div *ngIf="playerBio && bowl">
+      Tests
+    </div>
+        
+    <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bowl"
+      [dataSource]="playerTest"
+    >
+    <ng-container matColumnDef="Date">
+      <mat-header-cell *matHeaderCellDef>Matches</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.matches }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Team A">
+      <mat-header-cell *matHeaderCellDef>Innings</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let item">{{
+        item.innings
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Team B">
+      <mat-header-cell *matHeaderCellDef>Wickets</mat-header-cell>
+      <mat-cell class="duration-cell" *matCellDef="let item">{{
+        item.wickets
+      }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Toss">
+      <mat-header-cell *matHeaderCellDef>Average</mat-header-cell>
+      <mat-cell class="duration-cell" *matCellDef="let item">{{
+        item.average
+      }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Winner">
+      <mat-header-cell *matHeaderCellDef>best_figures</mat-header-cell>
+      <mat-cell class="duration-cell" *matCellDef="let item">{{item.best_figures}}</mat-cell>
+    </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <div *ngIf="playerBio && bowl">
+      T20Is
+    </div>
+    <mat-table
+      class="lessons-table mat-elevation-z8"
+      *ngIf="playerBio && bowl"
+      [dataSource]="playerT20"
+    >
+       <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef>Matches</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.matches }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team A">
+        <mat-header-cell *matHeaderCellDef>Innings</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let item">{{
+          item.innings
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Team B">
+        <mat-header-cell *matHeaderCellDef>Wickets</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.wickets
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Toss">
+        <mat-header-cell *matHeaderCellDef>Average</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{
+          item.average
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Winner">
+        <mat-header-cell *matHeaderCellDef>best_figures</mat-header-cell>
+        <mat-cell class="duration-cell" *matCellDef="let item">{{item.best_figures}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <!-- weather data -->
 
     <div *ngIf="weatherForm" class="jumbotron">
       <div class="container">
