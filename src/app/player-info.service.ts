@@ -13,8 +13,14 @@ export class PlayerInfoService {
 
   constructor(public http: Http) { }
 
-  getPlayer(player){
-    return this.http.get('https://lifesoul.herokuapp.com/playerBio?name='+player)   
+  getPlayer(name){
+
+    return this.http.get('https://cricapi.com/api/playerFinder?apikey=QtVy9OkhmzX7RIUo5xQdOgQ0ffE2&name='+name)   
+      .map(res => res.json()
+    )}
+  
+    getStats(pid){
+    return this.http.get('https://cricapi.com/api/playerStats?apikey=YQcxw12HpBMe1UaJ6TsKtZTC3Br2&pid='+pid)   
       .map(res => res.json()
     )};
 

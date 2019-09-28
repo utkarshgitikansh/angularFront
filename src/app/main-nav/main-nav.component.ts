@@ -49,17 +49,22 @@ export class MainNavComponent {
   bowl = true;
   icon_state: Boolean;
   icon_img: string;
-  playerData: PlayerData[];
+  playerData = [];
   blogData: any;
   blog_state: Boolean;
   playerODI: any;
   playerTest: any;
   playerT20: any;
+  playerBat = [];
+  playerBowl = [];
+  check = false;
 
   //climate : weather[];
 
   //dataSource = new UserDataSource(this.cmatches);
   displayedColumns = ["Date", "Team A", "Team B", "Toss", "Winner"];
+
+
 
   blogscolumns = ["blog", "title"];
 
@@ -127,11 +132,8 @@ export class MainNavComponent {
       this.info = data;
 
       this.characters = this.info.current_matches;
-    });
-
-    setTimeout(_ => {
       this.spinnerService.hide();
-    }, 2000);
+    });
   }
 
   upcomingScore() {
@@ -152,10 +154,9 @@ export class MainNavComponent {
       this.characters = this.info.upcoming_matches;
     });
 
-    setTimeout(_ => {
-      this.spinnerService.hide();
-    }, 2000);
+    this.spinnerService.hide();
   }
+
 
   formWeather() {
     this.weatherForm = true;
@@ -269,17 +270,19 @@ export class MainNavComponent {
     this.playerBio = true;
     this.blog_state = false;
 
+    this.spinnerService.show();
+
     var name = this.model.firstName;
 
     this.playerservices.getPlayer(name).subscribe((data: PlayerData[]) => {
-      this.info = data;
-      this.playerScore1();
+      var pid = data["data"]["0"]["pid"];
+      this.playerScore1(pid);
     });
     // this.menu();
     // this.playerForm();
   }
 
-  playerScore1() {
+  playerScore1(pid) {
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -290,29 +293,35 @@ export class MainNavComponent {
     this.blog_state = false;
     var name = this.model.firstName;
 
-    this.playerservices.getPlayer(name).subscribe((data: PlayerData[]) => {
-      setTimeout(_ => {
-        this.playerData = this.info.info;
-        this.playerODI = this.info.ODIs;
-        this.playerTest = this.info.tests;
-        this.playerT20 = this.info.T20Is;
+    this.playerservices.getStats(pid).subscribe((data) => {
 
-        var check = JSON.stringify(this.playerData[0]["player_role"]);
+      
+        this.playerData = [];
+        this.playerBat = [];
+        this.playerBowl = [];
+        this.playerData.push(data);
+        this.playerBat.push(this.playerData["0"]["data"]["batting"]);
+        this.playerBowl.push(this.playerData["0"]["data"]["bowling"]);
+     
+        this.spinnerService.hide();
+        console.log(this.playerBat);
+        this.check = true;
+        var check = JSON.stringify(this.playerData["player_role"]);
 
-        if (check.includes("batsman")) {
-          this.bat = true;
-          this.bowl = false;
-        } else {
-          this.bat = false;
-          this.bowl = true;
-        }
+        // if (check.includes("batsman")) {
+        //   this.bat = true;
+        //   this.bowl = false;
+        // } else {
+        //   this.bat = false;
+        //   this.bowl = true;
+        // }
 
         // if (this.bat == true) {
         //   console.log(this.playerData);
         // }
         //this.info = null;
-      }, 500);
-    });
+     
+     });
   }
 
   ///// getting blogs
