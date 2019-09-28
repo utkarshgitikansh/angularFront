@@ -18,7 +18,7 @@ export class WeatherInfoService {
 
   getcityInfo(city) {
     return this.http
-      .get("http://city-server.herokuapp.com/info?city=" + city)
+      .get("https://city-server.herokuapp.com/info?city=" + city)
       .map(res => res.json());
   }
 }
