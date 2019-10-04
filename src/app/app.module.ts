@@ -25,6 +25,7 @@ import { LogTestComponent } from "./log-test/log-test.component";
 import { LogPublishersService } from "./shared/logPublishers.service";
 import { BlogInfoComponent } from "./blog-info/blog-info.component";
 import { BlogServiceService } from "./blog-service.service";
+import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [

@@ -15,15 +15,24 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)"
   >
-    <mat-toolbar color="primary"></mat-toolbar>
+    <mat-toolbar color="primary" (click)="root()"> LIFESOUL 
+      
+    </mat-toolbar>
+  
+    <div id='icon'>
+        <img [src]="life_icon"/>
+      
+    </div>
 
-    <mat-nav-list>
+    <mat-nav-list *ngIf="menuFlag">
       <a mat-list-item (click)="menu()">Cricket</a>
       <a mat-list-item (click)="formWeather()">Weather</a>
       <a mat-list-item (click)="getBlog()">Blog</a>
       <!-- <a mat-list-item (click)="documents()">Documentation</a>
       <a mat-list-item (click)="logs()">Logs</a> -->
     </mat-nav-list>
+
+   
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -33,7 +42,7 @@
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async"
-      >
+      > 
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- <span>lifesoul</span> -->
@@ -50,6 +59,9 @@
         Player Info
       </button>
     </div> -->
+
+
+ 
 
     <!-- Blog data -->
 
@@ -141,6 +153,7 @@
 
       <mat-row *matRowDef="let row; columns: cricketcolumns"></mat-row>
     </mat-table> -->
+
 
     <mat-table
       class="lessons-table mat-elevation-z8"
@@ -707,5 +720,52 @@
     </div>
 
     <!-- <log-test></log-test> -->
+
+
+    <!-- login area -->
+    <div *ngIf="login" class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <h3> LOGIN !!</h3>
+              <form
+                name="form"
+                (ngSubmit)="f.form.valid && validate()"
+                #f="ngForm"
+                novalidate
+              >
+                <div class="form-group">
+                  <label for="firstName">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="firstName"
+                    [(ngModel)]="model.firstName"
+                    #firstName="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+                    required
+                  />
+                  <div
+                    *ngIf="f.submitted && firstName.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="firstName.errors.required">
+                      Password is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+ 
+
   </mat-sidenav-content>
+
+
 </mat-sidenav-container>

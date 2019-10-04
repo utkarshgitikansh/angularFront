@@ -18,6 +18,7 @@ import { Request } from "@angular/http";
 import { PlayerInfoService } from "./../player-info.service";
 import { BlogServiceService } from "./../blog-service.service";
 
+
 @Component({
   selector: "app-main-nav",
   templateUrl: "./main-nav.component.html",
@@ -58,6 +59,11 @@ export class MainNavComponent {
   playerBat = [];
   playerBowl = [];
   check = false;
+  home = true;
+  life_icon : any;
+  login = true;
+  password : any;
+  menuFlag =  false;
 
   //climate : weather[];
 
@@ -99,10 +105,28 @@ export class MainNavComponent {
     private cmatches: CurrentMatchesService,
     private spinnerService: Ng4LoadingSpinnerService,
     private playerservices: PlayerInfoService,
-    private blogServices: BlogServiceService
+    private blogServices: BlogServiceService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  this.life_icon =  `/assets/screen 2.png`;
+
+  }
+
+  root(){
+    this.weatherForm = false;
+    this.weatherInfo = false;
+    this.cricInfo = false;
+    this.upcomingInfo = false;
+    this.menuInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
+    this.icon_state = false;
+    this.blog_state = false;
+    this.home = true;
+
+  }
 
   menu() {
     this.weatherForm = false;
@@ -114,6 +138,8 @@ export class MainNavComponent {
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = false;
+    this.home = false;
+    this.login = false;
   }
 
   cricketScore() {
@@ -127,6 +153,8 @@ export class MainNavComponent {
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = false;
+    this.home = false;
+    this.login = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -147,6 +175,8 @@ export class MainNavComponent {
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = false;
+    this.home = false;
+    this.login = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -168,6 +198,8 @@ export class MainNavComponent {
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = false;
+    this.home = false;
+    this.login = false;
   }
 
   liveWeather() {
@@ -206,6 +238,7 @@ export class MainNavComponent {
     this.weatherForm = false;
     this.weatherInfo = true;
     this.icon_state = true;
+    this.login = false;
     this.spinnerService.hide();
     // this.hideForm = false;
     this.cricInfo = false;
@@ -214,6 +247,7 @@ export class MainNavComponent {
     this.playerBio = false;
     this.playerform = false;
     this.blog_state = false;
+    this.home = false;
 
     //this.formWeather();
     //this.liveWeather2(state, city);
@@ -258,6 +292,8 @@ export class MainNavComponent {
     this.playerform = true;
     this.playerBio = false;
     this.blog_state = false;
+    this.home = false;
+    this.login = false;
   }
 
   playerScore() {
@@ -269,6 +305,7 @@ export class MainNavComponent {
     this.playerform = false;
     this.playerBio = true;
     this.blog_state = false;
+    this.login = false;
 
     this.spinnerService.show();
 
@@ -291,6 +328,7 @@ export class MainNavComponent {
     this.playerform = false;
     this.playerBio = true;
     this.blog_state = false;
+    this.login = false;
     var name = this.model.firstName;
 
     this.playerservices.getStats(pid).subscribe((data) => {
@@ -326,6 +364,17 @@ export class MainNavComponent {
 
   ///// getting blogs
 
+  validate(){
+
+    
+     if(this.model.firstName == 'qwerty'){
+       this.menuFlag = true;
+       this.login = false;
+     }
+     else
+     console.log("TRY AGAIN !!");
+  }
+
   getBlog() {
     ////settings parameters
 
@@ -339,6 +388,8 @@ export class MainNavComponent {
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = true;
+    this.home = false;
+    this.login = false;
 
     this.blogServices.getBlogs().subscribe(data => {
       setTimeout(_ => {
@@ -351,6 +402,8 @@ export class MainNavComponent {
     });
   }
 }
+
+
 
 export class UserDataSource extends DataSource<any> {
   constructor(private userService: CurrentMatchesService) {
