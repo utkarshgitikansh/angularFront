@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import {MatCardModule} from '@angular/material/card';
+
 import {
   BreakpointObserver,
   Breakpoints,
@@ -17,13 +19,14 @@ import { Ng4LoadingSpinnerService } from "ng4-loading-spinner";
 import { Request } from "@angular/http";
 import { PlayerInfoService } from "./../player-info.service";
 import { BlogServiceService } from "./../blog-service.service";
+import { TravelDataService } from "./../travel-data.service";
 
 
 @Component({
   selector: "app-main-nav",
   templateUrl: "./main-nav.component.html",
   styleUrls: ["./main-nav.component.css"],
-  providers: [DataInfoService, WeatherInfoService, BlogServiceService]
+  providers: [DataInfoService, WeatherInfoService, BlogServiceService, TravelDataService]
 })
 export class MainNavComponent {
   info: any = "No Data";
@@ -64,6 +67,18 @@ export class MainNavComponent {
   login = true;
   password : any;
   menuFlag =  false;
+  travelflag = false;
+  travelInfo = false;
+  travel_city : any;
+  travel_dcity : any;
+
+  travel = [];
+  name1 : any;
+  dura1 : any;
+  price1 : any;
+  date_d1 : any;
+  date_r1 : any;
+  travel_len : any;
 
   //climate : weather[];
 
@@ -106,6 +121,7 @@ export class MainNavComponent {
     private spinnerService: Ng4LoadingSpinnerService,
     private playerservices: PlayerInfoService,
     private blogServices: BlogServiceService,
+    private travelData : TravelDataService
   ) {}
 
   ngOnInit() {
@@ -120,11 +136,13 @@ export class MainNavComponent {
     this.cricInfo = false;
     this.upcomingInfo = false;
     this.menuInfo = false;
+    this.travelflag = false;
     this.playerBio = false;
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = false;
     this.home = true;
+    this.travelInfo = false;
 
   }
 
@@ -140,6 +158,8 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
   }
 
   cricketScore() {
@@ -155,6 +175,8 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -177,6 +199,8 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -200,6 +224,8 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
   }
 
   liveWeather() {
@@ -227,7 +253,7 @@ export class MainNavComponent {
         console.log(this.city);
         this.weather = this.info.temperature;
         console.log(this.weather);
-        this.icon_img = this.weather[0]["icon_url"];
+        this.icon_img = this.weather[0]["icon_url"][0];
         //this.climate = this.weather_elements;
         //this.info = null;
       });
@@ -248,6 +274,8 @@ export class MainNavComponent {
     this.playerform = false;
     this.blog_state = false;
     this.home = false;
+    this.travelflag = false;
+    this.travelInfo = false;
 
     //this.formWeather();
     //this.liveWeather2(state, city);
@@ -281,6 +309,7 @@ export class MainNavComponent {
     this.upcomingInfo = false;
     this.playerBio = false;
     this.playerform = false;
+    this.travelInfo = false;
   }
 
   playerForm() {
@@ -294,6 +323,8 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
   }
 
   playerScore() {
@@ -306,6 +337,8 @@ export class MainNavComponent {
     this.playerBio = true;
     this.blog_state = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
 
     this.spinnerService.show();
 
@@ -329,6 +362,9 @@ export class MainNavComponent {
     this.playerBio = true;
     this.blog_state = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
+
     var name = this.model.firstName;
 
     this.playerservices.getStats(pid).subscribe((data) => {
@@ -390,6 +426,8 @@ export class MainNavComponent {
     this.blog_state = true;
     this.home = false;
     this.login = false;
+    this.travelflag = false;
+    this.travelInfo = false;
 
     this.blogServices.getBlogs().subscribe(data => {
       setTimeout(_ => {
@@ -401,6 +439,76 @@ export class MainNavComponent {
       }, 1000);
     });
   }
+
+///// Travel space
+
+
+menuTravel(){
+  this.weatherForm = false;
+  this.weatherInfo = false;
+  this.cricInfo = false;
+  this.upcomingInfo = false;
+  this.menuInfo = false;
+  this.playerBio = false;
+  this.playerform = false;
+  this.icon_state = false;
+  this.blog_state = false;
+  this.home = false;
+  this.login = false;
+  this.travelflag = true;
+  this.travelInfo = false;
+
+}
+getTravel(){
+
+  this.spinnerService.show();
+  this.weatherForm = false;
+  this.weatherInfo = false;
+  this.cricInfo = false;
+  this.upcomingInfo = false;
+  this.menuInfo = false;
+  this.playerBio = false;
+  this.playerform = false;
+  this.icon_state = false;
+  this.blog_state = false;
+  this.home = false;
+  this.login = false;
+  this.travelflag = false;
+  
+
+
+
+this.travelData.getCity(this.model.firstName, this.model.secondName).subscribe((data) => {
+  var name = data[0];
+  var dura = data[1];
+  var price = data[2];
+  var date_d = data[3];
+  var date_r = data[4];
+
+  this.name1 = name;
+  this.dura1 = dura;
+  this.price1 = price;
+  this.date_d1 = date_d;
+  this.date_r1 = date_r;
+
+  this.travelInfo = true;
+  
+  this.travel_len = name.length;
+  
+  console.log(name);
+  console.log(dura);
+  console.log(price);
+  console.log(date_d);
+  console.log(this.travel_len);
+
+  this.spinnerService.hide();
+  
+  
+
+});
+  
+}
+
 }
 
 

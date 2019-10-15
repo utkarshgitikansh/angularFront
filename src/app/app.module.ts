@@ -26,6 +26,8 @@ import { LogPublishersService } from "./shared/logPublishers.service";
 import { BlogInfoComponent } from "./blog-info/blog-info.component";
 import { BlogServiceService } from "./blog-service.service";
 import { RouterModule, Routes } from '@angular/router';
+import { TravelDataService } from './travel-data.service';
+import { MatCardModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { RouterModule, Routes } from '@angular/router';
     HttpClientModule,
     HttpModule,
     FormsModule,
+    MatCardModule,
     Ng4LoadingSpinnerModule.forRoot()
   ],
 
@@ -56,7 +59,8 @@ import { RouterModule, Routes } from '@angular/router';
     CurrentMatchesService,
     LogService,
     LogPublishersService,
-    BlogServiceService
+    BlogServiceService,
+    TravelDataService
   ],
   bootstrap: [AppComponent]
 })

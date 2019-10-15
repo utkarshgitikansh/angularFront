@@ -27,6 +27,7 @@
     <mat-nav-list *ngIf="menuFlag">
       <a mat-list-item (click)="menu()">Cricket</a>
       <a mat-list-item (click)="formWeather()">Weather</a>
+      <a mat-list-item (click)="menuTravel()">Travel</a>
       <a mat-list-item (click)="getBlog()">Blog</a>
       <!-- <a mat-list-item (click)="documents()">Documentation</a>
       <a mat-list-item (click)="logs()">Logs</a> -->
@@ -763,7 +764,137 @@
         </div>
       </div>
     
- 
+
+<!-- travel city  -->
+<div *ngIf="travelflag" class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <!-- <h3> {{travel_city}}  </h3> -->
+        <form
+          name="form"
+          (ngSubmit)="f.form.valid && getTravel()"
+          #f="ngForm"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="firstName">Enter your city</label>
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              [(ngModel)]="model.firstName"
+              #firstName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+              required
+            />
+            <div
+              *ngIf="f.submitted && firstName.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="firstName.errors.required">
+                City is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">Enter the city to travel</label>
+            <input
+              type="text"
+              class="form-control"
+              name="secondName"
+              [(ngModel)]="model.secondName"
+              #firstName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+              required
+            />
+            <div
+              *ngIf="f.submitted && firstName.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="secondName.errors.required">
+                City is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-default">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div  *ngIf="travelInfo">
+    <div>
+        <h1>Departure date</h1>
+        <p>{{date_d1}}</p>
+      </div>
+
+      <div>
+          <h1>Return date</h1>
+          <p>{{date_r1}}</p>
+      </div>
+      <mat-card class="travel-card" *ngFor="let item of name1; let i = index">
+        
+            <div id="name" >
+                <!-- <mat-card-header>
+                  <div mat-card-avatar class="travel-header-image"></div>
+                  <mat-card-title>Shiba Inu</mat-card-title>
+                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                </mat-card-header> -->
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content>
+                  
+                    {{name1[i]}}
+                  
+                </mat-card-content>
+                <!-- <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions> -->
+              </div>
+
+            <div id="dura" >
+                <!-- <mat-card-header>
+                  <div mat-card-avatar class="travel-header-image"></div>
+                  <mat-card-title>Shiba Inu</mat-card-title>
+                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                </mat-card-header> -->
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content>
+                  
+                    {{dura1[i]}}  
+                  
+                </mat-card-content>
+                <!-- <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions> -->
+              </div>
+
+        <div id="price" >
+        <!-- <mat-card-header>
+          <div mat-card-avatar class="travel-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header> -->
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <mat-card-content>
+          
+            {{price1[i]}} 
+          
+        </mat-card-content>
+        <!-- <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions> -->
+      </div>
+
+      </mat-card>
+    </div>
 
   </mat-sidenav-content>
 
