@@ -28,6 +28,7 @@ import { BlogServiceService } from "./blog-service.service";
 import { RouterModule, Routes } from '@angular/router';
 import { TravelDataService } from './travel-data.service';
 import { MatCardModule } from '@angular/material';
+import { NewsProviderService } from './news-provider.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MatCardModule } from '@angular/material';
     LogService,
     LogPublishersService,
     BlogServiceService,
-    TravelDataService
+    TravelDataService,
+    NewsProviderService
   ],
   bootstrap: [AppComponent]
 })

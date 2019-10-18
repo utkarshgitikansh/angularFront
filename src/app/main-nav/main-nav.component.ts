@@ -20,13 +20,14 @@ import { Request } from "@angular/http";
 import { PlayerInfoService } from "./../player-info.service";
 import { BlogServiceService } from "./../blog-service.service";
 import { TravelDataService } from "./../travel-data.service";
+import { NewsProviderService } from "./../news-provider.service";
 
 
 @Component({
   selector: "app-main-nav",
   templateUrl: "./main-nav.component.html",
   styleUrls: ["./main-nav.component.css"],
-  providers: [DataInfoService, WeatherInfoService, BlogServiceService, TravelDataService]
+  providers: [DataInfoService, WeatherInfoService, BlogServiceService, TravelDataService, NewsProviderService]
 })
 export class MainNavComponent {
   info: any = "No Data";
@@ -71,6 +72,8 @@ export class MainNavComponent {
   travelInfo = false;
   travel_city : any;
   travel_dcity : any;
+  newsInfo = false;
+
 
   travel = [];
   name1 : any;
@@ -79,6 +82,9 @@ export class MainNavComponent {
   date_d1 : any;
   date_r1 : any;
   travel_len : any;
+
+  news_headline : any;
+  news_content : any;
 
   //climate : weather[];
 
@@ -121,7 +127,8 @@ export class MainNavComponent {
     private spinnerService: Ng4LoadingSpinnerService,
     private playerservices: PlayerInfoService,
     private blogServices: BlogServiceService,
-    private travelData : TravelDataService
+    private travelData : TravelDataService,
+    private newsData : NewsProviderService
   ) {}
 
   ngOnInit() {
@@ -131,6 +138,7 @@ export class MainNavComponent {
   }
 
   root(){
+    this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -143,6 +151,19 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = true;
     this.travelInfo = false;
+    // this.newsInfo = true;
+
+    this.newsData.getNews().subscribe(data => {
+    
+      var item = data;
+     
+      this.news_headline = data["headLines"];
+      this.news_content = data["content"];
+
+       //console.log(item);
+       this.spinnerService.hide();
+   
+  });
 
   }
 
@@ -160,6 +181,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
   }
 
   cricketScore() {
@@ -177,6 +199,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -201,6 +224,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -226,6 +250,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
   }
 
   liveWeather() {
@@ -276,6 +301,7 @@ export class MainNavComponent {
     this.home = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
 
     //this.formWeather();
     //this.liveWeather2(state, city);
@@ -325,6 +351,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
   }
 
   playerScore() {
@@ -339,6 +366,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
 
     this.spinnerService.show();
 
@@ -364,6 +392,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
 
     var name = this.model.firstName;
 
@@ -406,6 +435,8 @@ export class MainNavComponent {
      if(this.model.firstName == 'qwerty'){
        this.menuFlag = true;
        this.login = false;
+       this.home = true;
+       this.root();
      }
      else
      console.log("TRY AGAIN !!");
@@ -428,6 +459,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.travelInfo = false;
+    this.newsInfo = false;
 
     this.blogServices.getBlogs().subscribe(data => {
       setTimeout(_ => {
@@ -457,6 +489,7 @@ menuTravel(){
   this.login = false;
   this.travelflag = true;
   this.travelInfo = false;
+  this.newsInfo = false;
 
 }
 getTravel(){
@@ -474,7 +507,7 @@ getTravel(){
   this.home = false;
   this.login = false;
   this.travelflag = false;
-  
+  this.newsInfo = false;
 
 
 
@@ -508,6 +541,34 @@ this.travelData.getCity(this.model.firstName, this.model.secondName).subscribe((
 });
   
 }
+
+// getNews(){
+//   this.spinnerService.show();
+//   this.weatherForm = false;
+//   this.weatherInfo = false;
+//   this.cricInfo = false;
+//   this.upcomingInfo = false;
+//   this.menuInfo = false;
+//   this.playerBio = false;
+//   this.playerform = false;
+//   this.icon_state = false;
+//   this.blog_state = false;
+//   this.home = false;
+//   this.login = false;
+//   this.travelflag = false;
+//   this.travelInfo = false;
+//   this.newsInfo = true;
+
+//   this.newsData.getNews().subscribe(data => {
+    
+//       var item = data;
+     
+
+//        console.log(item);
+//        this.spinnerService.hide();
+   
+//   });
+// }
 
 }
 
