@@ -18,6 +18,13 @@ input[type="password"] {
   background: #f1f1f1;
 }
 
+#card-image {
+
+  width: 20 px;
+  height: 20 px;
+
+}
+
 input[type="text"]:focus,
 input[type="password"]:focus {
   background-color: #ddd;
@@ -234,6 +241,46 @@ button.btn-danger:after {
 .travel-header-image {
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.mat-card-image {
+
+  /* object-fit: cover; this makes de image in src fit to the size of specified below */
+  width: 85%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 85%;
+  padding-top: 60px;
+
+}
+
+.news-card{
+ 
+    width: 1200x;
+    margin: auto;
+    height: 300px;
+}
+
+#first {
+  width: 500px;
+  float: left;
+  height: 300px;
+  /* margin: auto; */
+}
+
+#second {
+  width: 600px;
+  padding-top: 60px;
+  float: left;
+  height: 300px;
+  margin: auto;
 }
 /* button {
   background-color: #00c0f3;

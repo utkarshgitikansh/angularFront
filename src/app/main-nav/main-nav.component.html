@@ -898,28 +898,35 @@
 
 
 <!-- news -->
-<div *ngIf="home">
+
 
 <mat-card class="news-card" *ngFor="let item of news_headline; let i = index">
-        
-        <mat-card-header>
-          <div mat-card-avatar ></div>
+
+    <div *ngIf="home">
+        <div id="first">
+  <img class="mat-card-image" src="{{news_image[i]}}">
+        </div>
+<div id="second">
+        <mat-card-header >
           <mat-card-title><strong>{{item}}</strong></mat-card-title>
         </mat-card-header>
+      
         
+      
         <mat-card-content>
-          
+          <p>
          {{news_content[i]}}
-          
+          </p>
         </mat-card-content>
         <!-- <mat-card-actions>
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
         </mat-card-actions> -->
-
+      </div>
+    </div>
 </mat-card>
 
-</div>
+
 
   </mat-sidenav-content>
 

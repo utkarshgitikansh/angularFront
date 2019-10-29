@@ -85,6 +85,7 @@ export class MainNavComponent {
 
   news_headline : any;
   news_content : any;
+  news_image : any;
 
   //climate : weather[];
 
@@ -159,6 +160,7 @@ export class MainNavComponent {
      
       this.news_headline = data["headLines"];
       this.news_content = data["content"];
+      this.news_image= data["image"];
 
        //console.log(item);
        this.spinnerService.hide();
