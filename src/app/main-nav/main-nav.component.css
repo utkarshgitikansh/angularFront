@@ -4,7 +4,7 @@
 
 /* Add padding to containers */
 .container {
-  padding: 16px;
+  padding: 200px;
 }
 
 /* Full-width input fields */
@@ -19,10 +19,8 @@ input[type="password"] {
 }
 
 #card-image {
-
   width: 20 px;
   height: 20 px;
-
 }
 
 input[type="text"]:focus,
@@ -117,22 +115,18 @@ body {
   margin-top: 100px;
 }
 
-/* #icon {
+.icon {
+  height: 1px;
+  width: 1px;
+}
 
-  position: absolute;
-  left: 15%;
-  margin-left: 830px;
-  margin-top: 430px;
-
-} */
-
-img {
+/* img {
   border-radius: 4px;
   width: 100px;
   padding: 10px;
   margin-left: 50px;
   margin-top: 25px;
-}
+} */
 
 /*Remove that CSS*/
 .col-md-3 {
@@ -141,7 +135,7 @@ img {
 /*Remove that CSS*/
 
 button {
-  margin: 20px 0;
+  margin: 50px;
   line-height: 34px;
   position: relative;
   cursor: pointer;
@@ -248,24 +242,43 @@ button.btn-danger:after {
 }
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
 }
 
 .mat-card-image {
-
   /* object-fit: cover; this makes de image in src fit to the size of specified below */
-  width: 85%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  /* width: 85%; 
   height: 85%;
   padding-top: 60px;
-
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute; */
+  height: 268px;
+  width: 350px;
+  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding-top: 60px;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-left: 1px;
+  background-size: cover;
+  background-position: 50%;
+  background-position-x: 50%;
+  background-position-y: center;
+  align-content: center;
 }
 
-.news-card{
- 
-    width: 1200x;
-    margin: auto;
-    height: 300px;
+.news-card {
+  width: 1200x;
+  margin: auto;
+  height: 300px;
+  background-color: #ededed;
 }
 
 #first {
@@ -281,23 +294,81 @@ button.btn-danger:after {
   float: left;
   height: 300px;
   margin: auto;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
-/* button {
-  background-color: #00c0f3;
+
+.cric-card {
+  width: 1200x;
+  margin: auto;
+  height: 300px;
+}
+
+#first_c {
+  width: 1000px;
+  float: left;
+  height: 300px;
+  margin-left: 100px;
+  /* margin: auto; */
+}
+
+#second_c {
+  width: 500px;
+  /* margin-top: 60px; */
+  float: left;
+  height: 520px;
+  margin-top: 390px;
+  /* margin: auto; */
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.cric_container {
+  width: 1000px;
+}
+
+.cricket_icon {
+  /* padding-top: 1400px; */
+  /* margin-right: 100px; */
+  width: 550px;
+  height: 500px;
+  background-image: url("../assets/cricket_1.png");
+  /* position: relative; */
+}
+
+.copyright {
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+.background {
+  background-color: #ededed;
+}
+
+/* .lifesoul {
+  padding-left: 700px;
 } */
 
-/* #name {
-margin-left: 0px;
-margin-right: 700px;
+.row {
+  width: 500 px;
 }
 
 #dura {
-margin-left : 300px;
-margin-top: 0px;
-
+  margin-left: 300px;
+  margin-top: 0px;
 }
 
-#price{
-margin-left: 600px;
-margin-top : 0px
-} */
+#price {
+  margin-left: 600px;
+  margin-top: 0px;
+}
+
+img {
+  border-radius: 4px;
+  width: 50px;
+  padding: 10px;
+  margin-left: 600px;
+  margin-top: 4px;
+}

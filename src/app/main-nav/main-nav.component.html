@@ -6,6 +6,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
@@ -14,15 +16,14 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)"
-  >
-    <mat-toolbar color="primary" (click)="root()"> LIFESOUL 
-      
+  > 
+    <mat-toolbar color="primary"> 
+
     </mat-toolbar>
-  
-    <div id='icon'>
-        <img [src]="life_icon"/>
-      
-    </div>
+
+    <div class="copyright"> 
+        ©utkarshgitikansh 
+     </div>
 
     <mat-nav-list *ngIf="menuFlag">
       <a mat-list-item (click)="menu()">Cricket</a>
@@ -32,12 +33,11 @@
       <!-- <a mat-list-item (click)="documents()">Documentation</a>
       <a mat-list-item (click)="logs()">Logs</a> -->
     </mat-nav-list>
-
    
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
+      <!-- <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
@@ -45,8 +45,15 @@
         *ngIf="isHandset$ | async"
       > 
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+      </button> -->
+        <div (click)="root()">
+      
+          <img [src]="life_icon" />
+   
+
+      LIFESOUL 
       <!-- <span>lifesoul</span> -->
+    </div>
     </mat-toolbar>
     <!-- 
     <div *ngIf="menuInfo" id="menu_pos">
@@ -92,12 +99,12 @@
 
     <!-- Cricket data -->
 
-    <div class="container" *ngIf="menuInfo">
+    <div class="cric-card" *ngIf="menuInfo">
       <!-- <div class="row">
 		<h2>Cricket</h2>
 	</div> -->
 
-      <div class="row">
+      <div id="first_c">
         <div class="col-md-6">
           <!-- Standard button -->
           <button
@@ -109,6 +116,7 @@
           </button>
 
           <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
           <button
             type="button"
             class="btn btn-primary ribbon"
@@ -126,7 +134,14 @@
             Player Info
           </button>
         </div>
+       
+        
+
       </div>
+      <div id="second_c" class="cricket_icon">
+            
+        </div>
+      
     </div>
 
     <!-- <mat-table
@@ -728,7 +743,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <h3> LOGIN !!</h3>
+              <h3> KNOCK KNOCK !! WHO'S THERE ??  </h3>
               <form
                 name="form"
                 (ngSubmit)="f.form.valid && validate()"
@@ -736,7 +751,7 @@
                 novalidate
               >
                 <div class="form-group">
-                  <label for="firstName">Password</label>
+                  <label for="firstName">Tell us those magical words ...</label>
                   <input
                     type="password"
                     class="form-control"
@@ -756,7 +771,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-default">Submit</button>
+                  <button class="btn btn-default">Let me in</button>
                 </div>
               </form>
             </div>
@@ -898,14 +913,17 @@
 
 
 <!-- news -->
-
+<div *ngIf="home">
 
 <mat-card class="news-card" *ngFor="let item of news_headline; let i = index">
 
-    <div *ngIf="home">
+    <div >
         <div id="first">
+
   <img class="mat-card-image" src="{{news_image[i]}}">
+
         </div>
+
 <div id="second">
         <mat-card-header >
           <mat-card-title><strong>{{item}}</strong></mat-card-title>
@@ -926,7 +944,7 @@
     </div>
 </mat-card>
 
-
+</div>
 
   </mat-sidenav-content>
 

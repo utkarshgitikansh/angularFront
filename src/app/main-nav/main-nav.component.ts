@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from "@angular/material/card";
 
 import {
   BreakpointObserver,
@@ -22,12 +22,17 @@ import { BlogServiceService } from "./../blog-service.service";
 import { TravelDataService } from "./../travel-data.service";
 import { NewsProviderService } from "./../news-provider.service";
 
-
 @Component({
   selector: "app-main-nav",
   templateUrl: "./main-nav.component.html",
   styleUrls: ["./main-nav.component.css"],
-  providers: [DataInfoService, WeatherInfoService, BlogServiceService, TravelDataService, NewsProviderService]
+  providers: [
+    DataInfoService,
+    WeatherInfoService,
+    BlogServiceService,
+    TravelDataService,
+    NewsProviderService
+  ]
 })
 export class MainNavComponent {
   info: any = "No Data";
@@ -64,35 +69,32 @@ export class MainNavComponent {
   playerBowl = [];
   check = false;
   home = true;
-  life_icon : any;
+  life_icon: any;
   login = true;
-  password : any;
-  menuFlag =  false;
+  password: any;
+  menuFlag = false;
   travelflag = false;
   travelInfo = false;
-  travel_city : any;
-  travel_dcity : any;
+  travel_city: any;
+  travel_dcity: any;
   newsInfo = false;
 
-
   travel = [];
-  name1 : any;
-  dura1 : any;
-  price1 : any;
-  date_d1 : any;
-  date_r1 : any;
-  travel_len : any;
+  name1: any;
+  dura1: any;
+  price1: any;
+  date_d1: any;
+  date_r1: any;
+  travel_len: any;
 
-  news_headline : any;
-  news_content : any;
-  news_image : any;
+  news_headline: any;
+  news_content: any;
+  news_image: any;
 
   //climate : weather[];
 
   //dataSource = new UserDataSource(this.cmatches);
   displayedColumns = ["Date", "Team A", "Team B", "Toss", "Winner"];
-
-
 
   blogscolumns = ["blog", "title"];
 
@@ -128,17 +130,15 @@ export class MainNavComponent {
     private spinnerService: Ng4LoadingSpinnerService,
     private playerservices: PlayerInfoService,
     private blogServices: BlogServiceService,
-    private travelData : TravelDataService,
-    private newsData : NewsProviderService
+    private travelData: TravelDataService,
+    private newsData: NewsProviderService
   ) {}
 
   ngOnInit() {
-    
-  this.life_icon =  `/assets/screen 2.png`;
-
+    this.life_icon = `../../screen 2.png`;
   }
 
-  root(){
+  root() {
     this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
@@ -155,18 +155,18 @@ export class MainNavComponent {
     // this.newsInfo = true;
 
     this.newsData.getNews().subscribe(data => {
-    
       var item = data;
-     
+
       this.news_headline = data["headLines"];
       this.news_content = data["content"];
-      this.news_image= data["image"];
+      this.news_image = data["image"];
 
-       //console.log(item);
-       this.spinnerService.hide();
-   
-  });
+      setTimeout(() => {}, 1000);
 
+      this.spinnerService.hide();
+
+      //console.log(item);
+    });
   }
 
   menu() {
@@ -236,7 +236,6 @@ export class MainNavComponent {
 
     this.spinnerService.hide();
   }
-
 
   formWeather() {
     this.weatherForm = true;
@@ -398,50 +397,43 @@ export class MainNavComponent {
 
     var name = this.model.firstName;
 
-    this.playerservices.getStats(pid).subscribe((data) => {
+    this.playerservices.getStats(pid).subscribe(data => {
+      this.playerData = [];
+      this.playerBat = [];
+      this.playerBowl = [];
+      this.playerData.push(data);
+      this.playerBat.push(this.playerData["0"]["data"]["batting"]);
+      this.playerBowl.push(this.playerData["0"]["data"]["bowling"]);
 
-      
-        this.playerData = [];
-        this.playerBat = [];
-        this.playerBowl = [];
-        this.playerData.push(data);
-        this.playerBat.push(this.playerData["0"]["data"]["batting"]);
-        this.playerBowl.push(this.playerData["0"]["data"]["bowling"]);
-     
-        this.spinnerService.hide();
-        console.log(this.playerBat);
-        this.check = true;
-        var check = JSON.stringify(this.playerData["player_role"]);
+      this.spinnerService.hide();
+      console.log(this.playerBat);
+      this.check = true;
+      var check = JSON.stringify(this.playerData["player_role"]);
 
-        // if (check.includes("batsman")) {
-        //   this.bat = true;
-        //   this.bowl = false;
-        // } else {
-        //   this.bat = false;
-        //   this.bowl = true;
-        // }
+      // if (check.includes("batsman")) {
+      //   this.bat = true;
+      //   this.bowl = false;
+      // } else {
+      //   this.bat = false;
+      //   this.bowl = true;
+      // }
 
-        // if (this.bat == true) {
-        //   console.log(this.playerData);
-        // }
-        //this.info = null;
-     
-     });
+      // if (this.bat == true) {
+      //   console.log(this.playerData);
+      // }
+      //this.info = null;
+    });
   }
 
   ///// getting blogs
 
-  validate(){
-
-    
-     if(this.model.firstName == 'qwerty'){
-       this.menuFlag = true;
-       this.login = false;
-       this.home = true;
-       this.root();
-     }
-     else
-     console.log("TRY AGAIN !!");
+  validate() {
+    if (this.model.firstName == "qwerty") {
+      this.menuFlag = true;
+      this.login = false;
+      this.home = true;
+      this.root();
+    } else alert("TRY AGAIN !!");
   }
 
   getBlog() {
@@ -474,107 +466,96 @@ export class MainNavComponent {
     });
   }
 
-///// Travel space
+  ///// Travel space
 
+  menuTravel() {
+    this.weatherForm = false;
+    this.weatherInfo = false;
+    this.cricInfo = false;
+    this.upcomingInfo = false;
+    this.menuInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
+    this.icon_state = false;
+    this.blog_state = false;
+    this.home = false;
+    this.login = false;
+    this.travelflag = true;
+    this.travelInfo = false;
+    this.newsInfo = false;
+  }
+  getTravel() {
+    this.spinnerService.show();
+    this.weatherForm = false;
+    this.weatherInfo = false;
+    this.cricInfo = false;
+    this.upcomingInfo = false;
+    this.menuInfo = false;
+    this.playerBio = false;
+    this.playerform = false;
+    this.icon_state = false;
+    this.blog_state = false;
+    this.home = false;
+    this.login = false;
+    this.travelflag = false;
+    this.newsInfo = false;
 
-menuTravel(){
-  this.weatherForm = false;
-  this.weatherInfo = false;
-  this.cricInfo = false;
-  this.upcomingInfo = false;
-  this.menuInfo = false;
-  this.playerBio = false;
-  this.playerform = false;
-  this.icon_state = false;
-  this.blog_state = false;
-  this.home = false;
-  this.login = false;
-  this.travelflag = true;
-  this.travelInfo = false;
-  this.newsInfo = false;
+    this.travelData
+      .getCity(this.model.firstName, this.model.secondName)
+      .subscribe(data => {
+        var name = data[0];
+        var dura = data[1];
+        var price = data[2];
+        var date_d = data[3];
+        var date_r = data[4];
 
+        this.name1 = name;
+        this.dura1 = dura;
+        this.price1 = price;
+        this.date_d1 = date_d;
+        this.date_r1 = date_r;
+
+        this.travelInfo = true;
+
+        this.travel_len = name.length;
+
+        console.log(name);
+        console.log(dura);
+        console.log(price);
+        console.log(date_d);
+        console.log(this.travel_len);
+
+        this.spinnerService.hide();
+      });
+  }
+
+  // getNews(){
+  //   this.spinnerService.show();
+  //   this.weatherForm = false;
+  //   this.weatherInfo = false;
+  //   this.cricInfo = false;
+  //   this.upcomingInfo = false;
+  //   this.menuInfo = false;
+  //   this.playerBio = false;
+  //   this.playerform = false;
+  //   this.icon_state = false;
+  //   this.blog_state = false;
+  //   this.home = false;
+  //   this.login = false;
+  //   this.travelflag = false;
+  //   this.travelInfo = false;
+  //   this.newsInfo = true;
+
+  //   this.newsData.getNews().subscribe(data => {
+
+  //       var item = data;
+
+  //        console.log(item);
+  //        this.spinnerService.hide();
+
+  //   });
+  // }
 }
-getTravel(){
-
-  this.spinnerService.show();
-  this.weatherForm = false;
-  this.weatherInfo = false;
-  this.cricInfo = false;
-  this.upcomingInfo = false;
-  this.menuInfo = false;
-  this.playerBio = false;
-  this.playerform = false;
-  this.icon_state = false;
-  this.blog_state = false;
-  this.home = false;
-  this.login = false;
-  this.travelflag = false;
-  this.newsInfo = false;
-
-
-
-this.travelData.getCity(this.model.firstName, this.model.secondName).subscribe((data) => {
-  var name = data[0];
-  var dura = data[1];
-  var price = data[2];
-  var date_d = data[3];
-  var date_r = data[4];
-
-  this.name1 = name;
-  this.dura1 = dura;
-  this.price1 = price;
-  this.date_d1 = date_d;
-  this.date_r1 = date_r;
-
-  this.travelInfo = true;
-  
-  this.travel_len = name.length;
-  
-  console.log(name);
-  console.log(dura);
-  console.log(price);
-  console.log(date_d);
-  console.log(this.travel_len);
-
-  this.spinnerService.hide();
-  
-  
-
-});
-  
-}
-
-// getNews(){
-//   this.spinnerService.show();
-//   this.weatherForm = false;
-//   this.weatherInfo = false;
-//   this.cricInfo = false;
-//   this.upcomingInfo = false;
-//   this.menuInfo = false;
-//   this.playerBio = false;
-//   this.playerform = false;
-//   this.icon_state = false;
-//   this.blog_state = false;
-//   this.home = false;
-//   this.login = false;
-//   this.travelflag = false;
-//   this.travelInfo = false;
-//   this.newsInfo = true;
-
-//   this.newsData.getNews().subscribe(data => {
-    
-//       var item = data;
-     
-
-//        console.log(item);
-//        this.spinnerService.hide();
-   
-//   });
-// }
-
-}
-
-
 
 export class UserDataSource extends DataSource<any> {
   constructor(private userService: CurrentMatchesService) {
