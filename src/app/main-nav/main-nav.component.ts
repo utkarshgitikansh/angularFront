@@ -135,7 +135,7 @@ export class MainNavComponent {
   ) {}
 
   ngOnInit() {
-    this.life_icon = `../../screen 2.png`;
+    this.life_icon = `../../../assets/screen 2.png`;
   }
 
   root() {

@@ -368,7 +368,14 @@ button.btn-danger:after {
 img {
   border-radius: 4px;
   width: 50px;
-  padding: 10px;
-  margin-left: 600px;
-  margin-top: 4px;
+  padding: auto;
+  margin: auto;
+  
+}
+
+.image_div{
+
+padding: 5px;
+margin: auto ;
+
 }
