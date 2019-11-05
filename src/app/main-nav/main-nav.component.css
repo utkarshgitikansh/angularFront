@@ -73,7 +73,13 @@ body {
 }
 
 .sidenav {
+  width: 250px;
+  background-image: url("../assets/tree_life.jpg");
+}
+
+.imgnav {
   width: 200px;
+  background-image: url("../assets/tree_life.jpg");
 }
 
 .mat-toolbar.mat-primary {
@@ -302,7 +308,8 @@ button.btn-danger:after {
 .cric-card {
   width: 1200x;
   margin: auto;
-  height: 300px;
+  height: 900px;
+  background-image: url("../assets/cricket_6.png");
 }
 
 #first_c {
@@ -319,16 +326,17 @@ button.btn-danger:after {
   float: left;
   height: 520px;
   margin-top: 220px;
-  margin-left: 700px;
+  margin-left: 840px;
   /* margin: auto; */
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: hidden;
 }
 
-.cric_container {
+/* .cric_card {
   width: 1000px;
-}
+  background-image: url("../assets/cricket_5.png");
+} */
 
 .cricket_icon {
   /* padding-top: 1400px; */
@@ -371,12 +379,9 @@ img {
   width: 50px;
   padding: auto;
   margin: auto;
-  
 }
 
-.image_div{
-
-padding: 5px;
-margin: auto ;
-
+.image_div {
+  padding: 5px;
+  margin: auto;
 }
