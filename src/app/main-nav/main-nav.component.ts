@@ -93,6 +93,8 @@ export class MainNavComponent {
 
   buttonInfo = true;
 
+  life_icon_2: any;
+
   //climate : weather[];
 
   //dataSource = new UserDataSource(this.cmatches);
@@ -138,6 +140,7 @@ export class MainNavComponent {
 
   ngOnInit() {
     this.life_icon = `../../../assets/lifesoul_icon.png`;
+    this.life_icon_2 = `../../../assets/screen 2.png`;
   }
 
   root() {

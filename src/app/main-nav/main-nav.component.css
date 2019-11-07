@@ -180,10 +180,6 @@ body {
   text-align: center;
 }
 
-.image-size {
-  margin: 37px;
-}
-
 .copyright {
   color: #ddd;
 }
@@ -194,9 +190,14 @@ body {
   margin: 3px;
 }
 
+.image-size-icon {
+  margin: 37px;
+}
+
 /* .form-size {
   margin: 100px;
 } */
+
 /* 
 #weather_icon {
   width: 200%;
