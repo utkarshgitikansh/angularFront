@@ -91,6 +91,8 @@ export class MainNavComponent {
   news_content: any;
   news_image: any;
 
+  buttonInfo = true;
+
   //climate : weather[];
 
   //dataSource = new UserDataSource(this.cmatches);
@@ -135,11 +137,11 @@ export class MainNavComponent {
   ) {}
 
   ngOnInit() {
-    this.life_icon = `../../../assets/screen 2.png`;
+    this.life_icon = `../../../assets/lifesoul_icon.png`;
   }
 
   root() {
-    this.spinnerService.show();
+    //this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -152,21 +154,22 @@ export class MainNavComponent {
     this.blog_state = false;
     this.home = true;
     this.travelInfo = false;
+    this.buttonInfo = true;
     // this.newsInfo = true;
 
-    this.newsData.getNews().subscribe(data => {
-      var item = data;
+    // this.newsData.getNews().subscribe(data => {
+    //   var item = data;
 
-      this.news_headline = data["headLines"];
-      this.news_content = data["content"];
-      this.news_image = data["image"];
+    //   this.news_headline = data["headLines"];
+    //   this.news_content = data["content"];
+    //   this.news_image = data["image"];
 
-      setTimeout(() => {}, 1000);
+    //   setTimeout(() => {}, 1000);
 
-      this.spinnerService.hide();
+    //   this.spinnerService.hide();
 
-      //console.log(item);
-    });
+    //   //console.log(item);
+    // });
   }
 
   menu() {
@@ -184,6 +187,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
   }
 
   cricketScore() {
@@ -202,6 +206,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -227,6 +232,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     this.cmatches.getMatches().subscribe((data: Current_matches[]) => {
       this.info = data;
@@ -252,6 +258,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
   }
 
   liveWeather() {
@@ -303,6 +310,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     //this.formWeather();
     //this.liveWeather2(state, city);
@@ -337,6 +345,7 @@ export class MainNavComponent {
     this.playerBio = false;
     this.playerform = false;
     this.travelInfo = false;
+    this.buttonInfo = false;
   }
 
   playerForm() {
@@ -353,6 +362,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
   }
 
   playerScore() {
@@ -368,6 +378,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     this.spinnerService.show();
 
@@ -394,6 +405,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     var name = this.model.firstName;
 
@@ -454,6 +466,7 @@ export class MainNavComponent {
     this.travelflag = false;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     this.blogServices.getBlogs().subscribe(data => {
       setTimeout(_ => {
@@ -483,6 +496,7 @@ export class MainNavComponent {
     this.travelflag = true;
     this.travelInfo = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
   }
   getTravel() {
     this.spinnerService.show();
@@ -499,6 +513,7 @@ export class MainNavComponent {
     this.login = false;
     this.travelflag = false;
     this.newsInfo = false;
+    this.buttonInfo = false;
 
     this.travelData
       .getCity(this.model.firstName, this.model.secondName)

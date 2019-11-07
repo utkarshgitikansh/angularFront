@@ -9,7 +9,7 @@
 
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
+  <!-- <mat-sidenav
     #drawer
     class="sidenav"
     fixedInViewport="true"
@@ -29,13 +29,13 @@
       <a mat-list-item (click)="menu()">Cricket</a>
       <a mat-list-item (click)="formWeather()">Weather</a>
       <a mat-list-item (click)="menuTravel()">Travel</a>
-      <a mat-list-item (click)="getBlog()">Blog</a>
+      <a mat-list-item (click)="getBlog()">Blog</a> -->
       <!-- <a mat-list-item (click)="documents()">Documentation</a>
       <a mat-list-item (click)="logs()">Logs</a> -->
-    </mat-nav-list>
+    <!-- </mat-nav-list>
    
-  </mat-sidenav>
-  <mat-sidenav-content>
+  </mat-sidenav> -->
+  <mat-sidenav-content class="background">
     <mat-toolbar color="primary">
       <!-- <button
         type="button"
@@ -48,15 +48,135 @@
       </button> -->
         <div class="image_div" (click)="root()">
       
-          <img class="image" [src]="life_icon" />
-   
+          <img class="image-size" [src]="life_icon" />
 
-      LIFESOUL 
       <!-- <span>lifesoul</span> -->
     </div>
     </mat-toolbar>
-    <!-- 
-    <div *ngIf="menuInfo" id="menu_pos">
+<!-- 
+    <div class="text-align" >
+
+        <button type="button" class="btn btn-danger btn-circle btn-xl red">Red</button> 
+
+    </div> -->
+
+    <!-- <div class="two-buttons">
+    
+    <div class="text-align-left" >
+
+        <button type="button" class="btn btn-secondary btn-circle btn-xl gray">Gray</button>  
+
+    </div>
+
+    <div class="text-align-right" >
+
+        <button type="button" class="btn btn-success btn-circle btn-xl green">Green</button>  
+
+    </div>
+
+  </div> -->
+  <div class="button-container" *ngIf="buttonInfo" >
+  <div class="two-buttons">
+      <div class="col-xs-6 text-left">
+          <div class="text-align" >
+  
+              <button type="button" class="btn btn-danger btn-circle btn-xl red">
+                
+                <h3 *ngIf="menuFlag">
+                    <a class="button-items" mat-list-item (click)="menu()">Cricket</a>
+                </h3>
+
+              </button>  
+      
+          </div>
+      
+      </div>
+  
+      <div class="col-xs-6 text-right">   
+          <div class="text-align" >
+  
+              <button type="button" class="btn btn-success btn-circle btn-xl green">
+
+                  <h3 *ngIf="menuFlag">
+                      <a class="button-items" mat-list-item (click)="formWeather()">Weather</a>
+                  </h3>
+  
+              </button>  
+      
+          </div>
+      </div>
+  </div><!-- end panel-footer -->
+
+  <div class="form-size">
+  <form name="form"
+  (ngSubmit)="f.form.valid && validate()"
+  #f="ngForm"
+  novalidate class="form-inline">
+      <div class="form-group mx-sm-3 mb-2" *ngIf="login" >
+        <input type="password"  class="form-control"
+        name="firstName"
+        [(ngModel)]="model.firstName"
+        #firstName="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+        required class="form-control" id="inputPassword2" placeholder="Tell us those magical words ...">
+        <button type="submit" class="btn btn-primary mb-2 root-button">Let me in</button>
+      </div>
+
+      <div class="form-group mx-sm-3 mb-2" *ngIf="!login" >
+         
+        <div class="form-size">
+          <img class="image-size" [src]="life_icon" />
+        </div>
+
+      </div>
+        
+      
+    </form>
+  </div>
+
+  <div class="two-buttons">
+    <div class="col-xs-6 text-left">
+        <div class="text-align" >
+
+            <button type="button" class="btn btn-warning btn-circle btn-xl gray">
+                <h3 *ngIf="menuFlag">
+                    <a class="button-items" mat-list-item (click)="menuTravel()">Travel</a>
+                </h3>
+            </button>  
+    
+        </div>
+    
+    </div>
+
+    <div class="col-xs-6 text-right">   
+        <div class="text-align" >
+
+            <button type="button" class="btn btn-primary btn-circle btn-xl blue">
+                <h3 *ngIf="menuFlag">
+                    <a class="button-items" mat-list-item (click)="getBlog()">Blog</a>
+                </h3>
+            </button>  
+    
+        </div>
+    </div>
+    
+</div><!-- end panel-footer -->
+
+</div>
+    <!-- <div class="text-align" >
+
+        <button type="button" class="btn btn-primary btn-circle btn-xl red">Blue</button> 
+
+    </div> -->
+
+        <!-- <button type="button" class="btn btn-primary btn-circle btn-xl blue">Blue</button>  -->
+        <!-- <button type="button" class="btn btn-secondary btn-circle btn-xl gray">Gray</button>  -->
+        <!-- <button type="button" class="btn btn-success btn-circle btn-xl green">Green</button>  -->
+        
+
+    
+    
+    <!-- <div *ngIf="menuInfo" id="menu_pos">
       <button class="btn btn-primary" (click)="cricketScore()">
         Live Matches
       </button>
@@ -109,7 +229,7 @@
           <!-- Standard button -->
           <button
             type="button"
-            class="btn btn-warning ribbon"
+            class="btn btn-warning ribbon button"
             (click)="cricketScore()"
           >
             Live Score
@@ -119,7 +239,7 @@
 
           <button
             type="button"
-            class="btn btn-primary ribbon"
+            class="btn btn-primary ribbon button"
             (click)="upcomingScore()"
           >
             Upcoming Matches
@@ -128,7 +248,7 @@
           <!-- Indicates a successful or positive action -->
           <button
             type="button"
-            class="btn btn-success ribbon"
+            class="btn btn-success ribbon button"
             (click)="playerForm()"
           >
             Player Info
@@ -739,7 +859,7 @@
 
 
     <!-- login area -->
-    <div *ngIf="login" class="jumbotron">
+    <!-- <div *ngIf="login" class="jumbotron">
         <div class="container">
           <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -777,7 +897,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     
 
 <!-- travel city  -->

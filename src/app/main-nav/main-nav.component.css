@@ -85,9 +85,118 @@ body {
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
-  background-color: #00c0f3;
+
+  background-color: #003233;
+  /* background-color: #00c0f3; */
+  /* background-image: url("../assets/life_1.jpg"); */
 }
 
+.button-container {
+  margin: 200px;
+}
+
+.background {
+  background-image: url("../assets/life_1.jpg");
+}
+
+.text-align {
+  text-align: center;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.btn-circle.btn-xl {
+  padding: 250px;
+}
+
+.btn-circle.btn-xl.red {
+  width: 150px;
+  height: 150px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
+}
+
+.btn-circle.btn-xl.blue {
+  width: 150px;
+  height: 150px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
+}
+
+.btn-circle.btn-xl.gray {
+  width: 150px;
+  height: 150px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
+}
+
+.btn-circle.btn-xl.green {
+  width: 150px;
+  height: 150px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
+}
+
+.form-control {
+  height: auto;
+}
+.form-group {
+  width: 250px;
+  margin: auto;
+  text-align: center;
+}
+
+.form-inline {
+  text-align: center;
+  margin: 120 px;
+}
+
+.root-button {
+  margin: auto;
+  width: 250px;
+  height: auto;
+}
+
+.button-items {
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.image-size {
+  margin: 37px;
+}
+
+.copyright {
+  color: #ddd;
+}
+
+.image-size {
+  height: 50px;
+  width: 195px;
+  margin: 3px;
+}
+
+/* .form-size {
+  margin: 100px;
+} */
 /* 
 #weather_icon {
   width: 200%;
