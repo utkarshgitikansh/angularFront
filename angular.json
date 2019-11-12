@@ -129,5 +129,10 @@
       }
     }
   },
-  "defaultProject": "angularFront"
+  "defaultProject": "angularFront",
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false
+    }
+  }
 }
