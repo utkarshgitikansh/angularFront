@@ -10,7 +10,7 @@ import {
   MatButtonModule,
   MatSidenavModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
 } from "@angular/material";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from "@angular/http";
@@ -25,17 +25,18 @@ import { LogTestComponent } from "./log-test/log-test.component";
 import { LogPublishersService } from "./shared/logPublishers.service";
 import { BlogInfoComponent } from "./blog-info/blog-info.component";
 import { BlogServiceService } from "./blog-service.service";
-import { RouterModule, Routes } from '@angular/router';
-import { TravelDataService } from './travel-data.service';
-import { MatCardModule } from '@angular/material';
-import { NewsProviderService } from './news-provider.service';
+import { RouterModule, Routes } from "@angular/router";
+import { TravelDataService } from "./travel-data.service";
+import { MatCardModule } from "@angular/material";
+import { IgxCardModule } from "igniteui-angular";
+import { NewsProviderService } from "./news-provider.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     LogTestComponent,
-    BlogInfoComponent
+    BlogInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,8 @@ import { NewsProviderService } from './news-provider.service';
     HttpModule,
     FormsModule,
     MatCardModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    IgxCardModule,
+    Ng4LoadingSpinnerModule.forRoot(),
   ],
 
   providers: [
@@ -62,10 +64,10 @@ import { NewsProviderService } from './news-provider.service';
     LogPublishersService,
     BlogServiceService,
     TravelDataService,
-    NewsProviderService
+    NewsProviderService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  template: string = `<img src="http://pa1.narvii.com/5722/2c617cd9674417d272084884b61e4bb7dd5f0b15_hq.gif" />`;
+  // template: string = `<img src="http://pa1.narvii.com/5722/2c617cd9674417d272084884b61e4bb7dd5f0b15_hq.gif" />`;
 }

@@ -4,7 +4,7 @@ import { MatCardModule } from "@angular/material/card";
 import {
   BreakpointObserver,
   Breakpoints,
-  BreakpointState
+  BreakpointState,
 } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -31,8 +31,8 @@ import { NewsProviderService } from "./../news-provider.service";
     WeatherInfoService,
     BlogServiceService,
     TravelDataService,
-    NewsProviderService
-  ]
+    NewsProviderService,
+  ],
 })
 export class MainNavComponent {
   info: any = "No Data";
@@ -108,23 +108,23 @@ export class MainNavComponent {
   menuItems = [
     {
       name: "Live Matches",
-      func: "cricketScore()"
+      func: "cricketScore()",
     },
 
     {
       name: "Upcoming Matches",
-      func: "upcomingScore()"
+      func: "upcomingScore()",
     },
 
     {
       name: "Player Info",
-      func: "playerForm()"
-    }
+      func: "playerForm()",
+    },
   ];
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+    .pipe(map((result) => result.matches));
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -139,12 +139,31 @@ export class MainNavComponent {
   ) {}
 
   ngOnInit() {
+    this.spinnerService.show();
     this.life_icon = `../../../assets/lifesoul_icon.png`;
     this.life_icon_2 = `../../../assets/screen 2.png`;
+
+    //news info
+
+    this.newsData.getNews().subscribe((data) => {
+      var item = data;
+
+      this.news_headline = data["headLines"];
+      this.news_content = data["content"];
+      this.news_image = data["image"];
+
+      setTimeout(() => {}, 1000);
+
+      this.spinnerService.hide();
+      // this.menuFlag = true;
+      // this.login = false;
+
+      //console.log(item);
+    });
   }
 
   root() {
-    //this.spinnerService.show();
+    // this.spinnerService.show();
     this.weatherForm = false;
     this.weatherInfo = false;
     this.cricInfo = false;
@@ -155,24 +174,11 @@ export class MainNavComponent {
     this.playerform = false;
     this.icon_state = false;
     this.blog_state = false;
-    this.home = true;
     this.travelInfo = false;
+
+    this.home = true;
     this.buttonInfo = true;
-    // this.newsInfo = true;
-
-    // this.newsData.getNews().subscribe(data => {
-    //   var item = data;
-
-    //   this.news_headline = data["headLines"];
-    //   this.news_content = data["content"];
-    //   this.news_image = data["image"];
-
-    //   setTimeout(() => {}, 1000);
-
-    //   this.spinnerService.hide();
-
-    //   //console.log(item);
-    // });
+    this.newsInfo = true;
   }
 
   menu() {
@@ -248,7 +254,7 @@ export class MainNavComponent {
 
   formWeather() {
     this.weatherForm = true;
-    this.weatherInfo = false;
+    this.weatherInfo = true;
     this.cricInfo = false;
     this.menuInfo = false;
     this.upcomingInfo = false;
@@ -271,6 +277,7 @@ export class MainNavComponent {
 
     //this.weather = null;
     //console.log(this.weather_elements);
+    this.spinnerService.show();
     this.liveWeather1(this.model.firstName, this.model.lastName);
 
     //this.liveWeather();
@@ -292,6 +299,7 @@ export class MainNavComponent {
         this.icon_img = this.weather[0]["icon_url"][0];
         //this.climate = this.weather_elements;
         //this.info = null;
+        this.spinnerService.hide();
       });
 
     this.cityInfo(city);
@@ -322,7 +330,7 @@ export class MainNavComponent {
   // city info
 
   cityInfo(city) {
-    this.wservice.getcityInfo(city).subscribe(data => {
+    this.wservice.getcityInfo(city).subscribe((data) => {
       this.city_data = data;
       console.log(this.city_data);
     });
@@ -412,7 +420,7 @@ export class MainNavComponent {
 
     var name = this.model.firstName;
 
-    this.playerservices.getStats(pid).subscribe(data => {
+    this.playerservices.getStats(pid).subscribe((data) => {
       this.playerData = [];
       this.playerBat = [];
       this.playerBowl = [];
@@ -444,10 +452,12 @@ export class MainNavComponent {
 
   validate() {
     if (this.model.firstName == "qwerty") {
+      this.root();
+
+      this.spinnerService.hide();
       this.menuFlag = true;
       this.login = false;
-      this.home = true;
-      this.root();
+      // this.home = true;
     } else alert("TRY AGAIN !!");
   }
 
@@ -471,10 +481,10 @@ export class MainNavComponent {
     this.newsInfo = false;
     this.buttonInfo = false;
 
-    this.blogServices.getBlogs().subscribe(data => {
-      setTimeout(_ => {
+    this.blogServices.getBlogs().subscribe((data) => {
+      setTimeout((_) => {
         var item = data;
-        item["items"].forEach(element => {
+        item["items"].forEach((element) => {
           this.blogData = item["items"];
           this.spinnerService.hide();
         });
@@ -520,7 +530,7 @@ export class MainNavComponent {
 
     this.travelData
       .getCity(this.model.firstName, this.model.secondName)
-      .subscribe(data => {
+      .subscribe((data) => {
         var name = data[0];
         var dura = data[1];
         var price = data[2];

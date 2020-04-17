@@ -1,5 +1,8 @@
-* {
+body {
   box-sizing: border-box;
+}
+.wallpaper {
+  background-image: url("https://digitalsynopsis.com/wp-content/uploads/2017/06/beautiful-color-palettes-combinations-schemes-beach-towels.png");
 }
 
 /* Add padding to containers */
@@ -90,13 +93,12 @@ body {
   /* background-color: #00c0f3; */
   /* background-image: url("../assets/life_1.jpg"); */
 }
-
-.button-container {
-  margin: 200px;
+.mat-table {
+  margin: auto;
 }
 
-.background {
-  background-image: url("../assets/life_1.jpg");
+.button-container {
+  margin-top: 5%;
 }
 
 .text-align {
@@ -344,9 +346,9 @@ button.btn-danger:after {
   z-index: -1;
 }
 
-.news-card {
+/* .news-card {
   z-index: -1;
-}
+} */
 
 .travel-header-image {
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
@@ -379,9 +381,9 @@ button.btn-danger:after {
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   padding-top: 60px;
-  overflow: hidden;
+  /* overflow: hidden;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: hidden; */
   margin-left: 1px;
   background-size: cover;
   background-position: 50%;
@@ -391,7 +393,7 @@ button.btn-danger:after {
 }
 
 .news-card {
-  width: 1200x;
+  width: 600x;
   margin: auto;
   height: 300px;
   background-color: #ededed;
@@ -405,20 +407,20 @@ button.btn-danger:after {
 }
 
 #second {
-  width: 600px;
+  width: 200px;
   padding-top: 60px;
   float: left;
-  height: 300px;
+  height: 100px;
   margin: auto;
-  overflow: hidden;
+  /* overflow: hidden;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: hidden; */
 }
 
 .cric-card {
-  width: 1200x;
+  width: 100%;
   margin: auto;
-  height: 900px;
+  height: 450px;
   background-image: url("../assets/cricket_6.png");
 }
 
@@ -438,9 +440,9 @@ button.btn-danger:after {
   margin-top: 220px;
   margin-left: 840px;
   /* margin: auto; */
-  overflow: hidden;
+  /* overflow: hidden;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: hidden;*/
 }
 
 /* .cric_card {
@@ -492,6 +494,65 @@ img {
 }
 
 .image_div {
-  padding: 5px;
+  padding: auto;
   margin: auto;
+}
+
+.news-group {
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 550px;
+  height: 500px;
+}
+
+.card {
+  max-width: fit-content;
+  margin: auto;
+  text-align: center;
+  font-size: medium;
+  border-color: 3px solid black;
+}
+.card_container {
+  margin: 5%;
+  max-height: 450px;
+  overflow-y: scroll;
+  max-width: 100%;
+}
+
+#style-7::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+.scrollbar {
+  margin-left: 30px;
+  float: left;
+  height: 300px;
+  width: 65px;
+  background: #f5f5f5;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
+
+.two-buttons {
+  margin-top: 10px;
+}
+.upper {
+  margin-top: 20px;
+  height: 80px;
+  width: 80%;
+}
+.lower {
+  height: 100px;
+  width: 80%;
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
 }
