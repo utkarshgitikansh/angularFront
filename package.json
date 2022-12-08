@@ -28,7 +28,7 @@
     "@angular/router": "^8.2.13",
     "angular-material": "^1.1.20",
     "core-js": "^2.6.10",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "g": "^2.0.1",
     "igniteui-angular": "^8.2.24",
     "json-easy-filter": "^0.3.1",
